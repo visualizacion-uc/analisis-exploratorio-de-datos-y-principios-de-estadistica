@@ -1,0 +1,25 @@
+---
+title: "<div id=\"brand\">a|1e|2d|1</div><div id=\"brand\">e|1s|2t|1a|2d|3i|2s|2t|1i|1c|2a|1</div>"
+author: "<div id=\"subbrand\">Joshua Kunst, Septiembre 2017</div>"
+output:
+  revealjs::revealjs_presentation:
+    self_contained: false
+    mathjax: null
+    transition: fade
+    css: ["css/styles.css"]
+    incremental: true
+    center: false
+    theme: simple
+    fig_width: 5
+    fig_height: 4
+    reveal_options:
+      slideNumber: true
+      controls: false
+      mouseWheel: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+source("R/setup.R")
+```
