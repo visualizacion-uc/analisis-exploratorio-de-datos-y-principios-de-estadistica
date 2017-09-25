@@ -84,6 +84,9 @@ body {
   margin-left: -1.5em; /* same as padding-left set on li */
   width: 1.5em; /* same as padding-left set on li */
 }
+/* nested lists */
+.reveal section ul li ul {padding-top: 0em; padding-bottom: 0em;}
+
 
 /* code */
 .reveal code { font-family: "Fira Mono"; font-size: 85%;}

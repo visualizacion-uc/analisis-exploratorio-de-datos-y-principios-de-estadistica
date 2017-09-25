@@ -10,8 +10,9 @@ output:
     css: ["css/styles.css"]
     incremental: true
     center: false
+    # center: true
     theme: simple
-    fig_width: 5
+    fig_width: 7
     fig_height: 4
     reveal_options:
       slideNumber: true
@@ -21,27 +22,30 @@ editor_options:
   chunk_output_type: console
 ---
 
+# { data-background="img/data-culture.jpg"}
+
 ```{r, include = FALSE}
 source("R/setup.R")
 ```
 
-# Qué haremos?
-
 ## Que haremos?
 
-- Introducción
-- Análsis Exploratorio de Datos (AED)
-- Estadística Descriptiva (ED)
-- Estudiar Ejemplos<span class="fragment">, hacer ejemplos</span>
-<span class="fragment">y vivir ejemplos</span>
+> - Introducción
+> - Análsis Exploratorio de Datos (AED)
+> - Estadística Descriptiva (ED)
+>      * Medidas de Tendencia
+>      * Selección de gráficos
+> - Estudiar Ejemplos
+<span class="fragment">, hacer ejemplos</span><span class="fragment">, __equivocarnos__</span>
+<span class="fragment">, __corregirnos__</span><span class="fragment">, vivir ejemplos</span>
 
 # Introducción
 
 ## Introducción
 
-![](http://r4ds.had.co.nz/diagrams/data-science.png)
+![](https://visualizacion-uc.github.io/procesamiento-y-analisis-de-datos/clases/img/tidy-data.png)
 
-(Fuente: R for Data Science, Wickham & Grolemund)
+Fuente: R for Data Science, Wickham & Grolemund
 
 ## Introducción
 
@@ -51,12 +55,29 @@ El Análisis __Exploratorio__ y la
 Estadística __Descriptiva__ son parte clave 
 para el entendimiento
 
+<span class="fragment">`r ico("quote-left")` Escuchar lo que los datos nos hablan</span>
+
 ## Introducción
 
 AED y ED van muy de la mano. 
 
 Uno el el fin y el otro es una herramienta para 
 lograr dicho fin.
+
+
+## Glosario
+
+> - Una __variable__ es una cantidad, que puede ser medida: estatura, magnitud
+de un sismo, velocidad de un huracán, inteligencia (__¿?__)
+> - Un __valor__ es un estado de la variable cuando se mide: 1.20 metros, 8° Richter
+> - Una __observación__ o __caso__  es un conjunto de mediciones -no de la misma
+variable necesariamente- pero si en un mismo instante y a un mismo objeto.
+
+## Glosario
+
+> - __Datos tabulados__ es un conjunto de _valores_ cada uno asociado
+a una _variable_ y una _observación_
+![](http://garrettgman.github.io/images/tidy-1.png)
 
 ## Prerequisitos
 
@@ -68,7 +89,7 @@ Antes de partir necesitamos:
 
 # Análisis Exploratorio de Datos
 
-## AED 
+## Análisis Exploratorio de Datos 
 
 No existe definición formal con reglas a seguir. Es un __estado mental__
 
@@ -80,20 +101,30 @@ No existe definición formal con reglas a seguir. Es un __estado mental__
 
 ## AED
 
-Generar conocimiento no solo implica la información que tratan de medir
+<br>
+
+Generar conocimiento no solo implica extraer la información que tratan de medir
 los datos
 
-<span class="fragment">Este conocimiento puede estar también en conocer si los datos fueron bien medidos: _validar calidad de los datos_</span>
+<span class="fragment">Este conocimiento puede estar también en conocer si los datos fueron bien medidos o existen algunos registros datos mal registrados</span>
+
+<span class="fragment">__Validar calidad de los datos__</span>
+
 
 ## Visualizando Distribuciones { .right .white data-background-iframe="vis-dis.html" }
 
 ## Distribución
+
+<br>
 
 Distribución se relaciona a la forma que varían los datos de medición en 
 medición.
 
 <span class="fragment">Estudiando la forma de como se distribuyen los datos podemos ver
 cuales son los más comunes, o ver si exsiten casos raros<span>
+
+<span class="fragment">Y variará principalmente del tipo de variable analizada:
+__categórica__ o __continua__</span>
 
 ## Dataset Legos { .left .white    data-background="http://media-cdn.timesfreepress.com/img/photos/2016/07/25/1469464845_0727MfeatLibrary1-C_t1070_h5be62d5b4b340aded4d6baf5bd671ee4fd6571f4.jpg" }
 
@@ -117,6 +148,26 @@ legos %>% count(Theme, sort = TRUE)
 
 ## Explorando Variables Discretas
 
+¿Cuántos temas hay?
+
+```{r}
+ggplot(legos) +
+  geom_bar(aes(Theme))
+```
+
+## Explorando Variables Discretas
+
+¿Cuántos temas hay?
+
+```{r}
+library(forcats)
+legos <- mutate(legos, Theme2 = fct_lump(Theme, n = 10))
+ggplot(legos) +
+  geom_bar(aes(Theme2))
+```
+
+## Explorando Variables Discretas
+
 ¿Cuáles son los tipos de envoltorio?
 
 ```{r}
@@ -125,7 +176,7 @@ legos %>% count(Packaging, sort = TRUE)
 
 ## Explorando Variables Discretas
 
-¿Cuáles son los tipos de envoltorio?
+¿Cuáles son los tipos de embalajes?
 
 ```{r}
 ggplot(legos) +
@@ -134,7 +185,7 @@ ggplot(legos) +
 
 ## Explorando Variables Discretas
 
-¿Y esos ejes?
+¿Y esas etiquetas? 
 
 <br>
 
@@ -142,7 +193,7 @@ ggplot(legos) +
 
 ## Explorando Variables Discretas
 
-¿Y esos ejes?
+¿Y esas etiquetas? 
 
 ```{r}
 ggplot(legos) +
@@ -150,9 +201,20 @@ ggplot(legos) +
   coord_flip() # rotar :D
 ```
 
+## Explorando Variables Discretas
+
+¿Y esas etiquetas? 
+
+```{r}
+legos <- mutate(legos, Packaging = fct_infreq(Packaging)) # ordenar
+ggplot(legos) +
+  geom_bar(aes(Packaging)) +
+  coord_flip() # rotar :D
+```
+
 ## Explorando Variables Continuas
 
-¿Desde cuándo se han vendido legos?*
+¿Desde cuándo se _tenemos registros_ de sets de legos?*
 
 ```{r}
 ggplot(legos) +
@@ -190,20 +252,42 @@ legos %>%
 
 # Estadística Descriptiva
 
-## ED
+## Estadística Descriptiva
 
 Conjunto de procedimientos para __resumir__ datos.
 
-- Generar gráficos
-- Realizar tablas
-- Generar medidas de resumen
+- Medidas de tendencia central y dispersión
+- Visualización de datos
 
 <span class="fragment">__Sintetizar información__<span>
 
-## Medidas de Resumen
+## Medidas de Tendencia 
 
+<br>
 
-# Ejericios
+Son indicadores (generalmente un número) obtenidos de los datos 
+que __resumen__ información y nos hablan de alguna característica de 
+la distribución de la variable.
+
+## Medidas de Tendencia 
+
+## Visualización de datos
+
+## Visualización de datos
+
+Se refiere a la representación gráfica de los datos codificando la información o atributos como: posición, tamaño, formas, colores
+
+![](img/data-viz.jpg)
+
+## Lollipop
+
+![](http://uc-r.github.io/public/images/visual/lollipop/lollipop-icon.png)
+
+Fuente: http://uc-r.github.io/lollipop
+
+# Ejercicio I
+
+Dada la 
 
 ## Datos
 
