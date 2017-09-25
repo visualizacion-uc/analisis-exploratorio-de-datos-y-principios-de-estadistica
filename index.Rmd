@@ -4,6 +4,7 @@ author: "<div id=\"subbrand\">Joshua Kunst, Septiembre 2017</div>"
 output:
   revealjs::revealjs_presentation:
     self_contained: false
+    reveal_plugins: ["zoom"]
     mathjax: null
     transition: fade
     css: ["css/styles.css"]
@@ -23,3 +24,204 @@ editor_options:
 ```{r, include = FALSE}
 source("R/setup.R")
 ```
+
+# Qué haremos?
+
+## Que haremos?
+
+- Introducción
+- Análsis Exploratorio de Datos (AED)
+- Estadística Descriptiva (ED)
+- Estudiar Ejemplos<span class="fragment">, hacer ejemplos</span>
+<span class="fragment">y vivir ejemplos</span>
+
+# Introducción
+
+## Introducción
+
+![](http://r4ds.had.co.nz/diagrams/data-science.png)
+
+(Fuente: R for Data Science, Wickham & Grolemund)
+
+## Introducción
+
+Antes de __explicar__ debemos __entender__
+
+El Análisis __Exploratorio__ y la 
+Estadística __Descriptiva__ son parte clave 
+para el entendimiento
+
+## Introducción
+
+AED y ED van muy de la mano. 
+
+Uno el el fin y el otro es una herramienta para 
+lograr dicho fin.
+
+## Prerequisitos
+
+Antes de partir necesitamos:
+
+- Entusiasmo
+- Mantener la mente abierta
+- Familiarizado con `ggplot2` y `dplyr`
+
+# Análisis Exploratorio de Datos
+
+## AED 
+
+No existe definición formal con reglas a seguir. Es un __estado mental__
+
+- Generar preguntas acerca de los datos
+- Buscar respuestas visualizando, transformando los datos
+- Hacer nuevas preguntas a partir de lo aprendido
+
+<span class="fragment">__Generar conocimiento__</span>
+
+## AED
+
+Generar conocimiento no solo implica la información que tratan de medir
+los datos
+
+<span class="fragment">Este conocimiento puede estar también en conocer si los datos fueron bien medidos: _validar calidad de los datos_</span>
+
+## Visualizando Distribuciones { .right .white data-background-iframe="vis-dis.html" }
+
+## Distribución
+
+Distribución se relaciona a la forma que varían los datos de medición en 
+medición.
+
+<span class="fragment">Estudiando la forma de como se distribuyen los datos podemos ver
+cuales son los más comunes, o ver si exsiten casos raros<span>
+
+## Dataset Legos { .left .white    data-background="http://media-cdn.timesfreepress.com/img/photos/2016/07/25/1469464845_0727MfeatLibrary1-C_t1070_h5be62d5b4b340aded4d6baf5bd671ee4fd6571f4.jpg" }
+
+## Leyendo datos
+
+```{r}
+library(tidyverse)
+
+legos <- read_csv("https://raw.githubusercontent.com/seankross/lego/master/data-tidy/legosets.csv")
+# primer paso! paso #1
+glimpse(legos)
+```
+
+## Explorando Variables Discretas
+
+¿Cuántos temas hay?
+
+```{r}
+legos %>% count(Theme, sort = TRUE)
+```
+
+## Explorando Variables Discretas
+
+¿Cuáles son los tipos de envoltorio?
+
+```{r}
+legos %>% count(Packaging, sort = TRUE)
+```
+
+## Explorando Variables Discretas
+
+¿Cuáles son los tipos de envoltorio?
+
+```{r}
+ggplot(legos) +
+  geom_bar(aes(Packaging))
+```
+
+## Explorando Variables Discretas
+
+¿Y esos ejes?
+
+<br>
+
+<img src="https://i.giphy.com/media/tu54GM19sqJOw/giphy.webp" onerror="this.onerror=null;this.src='https://i.giphy.com/tu54GM19sqJOw.gif';" alt="">
+
+## Explorando Variables Discretas
+
+¿Y esos ejes?
+
+```{r}
+ggplot(legos) +
+  geom_bar(aes(Packaging)) +
+  coord_flip() # rotar :D
+```
+
+## Explorando Variables Continuas
+
+¿Desde cuándo se han vendido legos?*
+
+```{r}
+ggplot(legos) +
+  geom_bar(aes(Year))
+```
+
+## Explorando Variables Continuas
+
+¿Cuántas piezas traen los sets?
+
+```{r}
+ggplot(legos) +
+  geom_histogram(aes(Pieces))
+```
+
+## Explorando Variables Continuas
+
+¿Cuántas minifuguras traen los sets?
+
+```{r}
+ggplot(legos) +
+  geom_histogram(aes(Minifigures))
+```
+
+## Valores comunes, valores raros
+
+En el caso anterior, ¿Cuál es el número más comun de figuras?
+¿Cuántos sets traen más de 25 figuras? ¿Cuáles son?
+
+```{r}
+legos %>% 
+  filter(Minifigures > 25) %>% 
+  select(Name, Year, Theme, Minifigures)
+```
+
+# Estadística Descriptiva
+
+## ED
+
+Conjunto de procedimientos para __resumir__ datos.
+
+- Generar gráficos
+- Realizar tablas
+- Generar medidas de resumen
+
+<span class="fragment">__Sintetizar información__<span>
+
+## Medidas de Resumen
+
+
+# Ejericios
+
+## Datos
+
+seismic monitor data api
+https://earthquake.usgs.gov/fdsnws/event/1/
+
+## Datos
+
+```{r, cache=TRUE}
+library(tidyverse)
+
+data <- read_delim("https://earthquake.usgs.gov/fdsnws/event/1/query?starttime=2017-09-01&endtime=2017-09-31&format=text", delim = "|")
+glimpse(data)
+```
+
+# Créditos
+
+<small>
+>- Imágen Lego Arto Alanenpaa http://www.timesfreepress.com/news/community/story/2016/jul/27/calvdonaldsseeks-donations-library-makerspace/377683/
+
+</small>

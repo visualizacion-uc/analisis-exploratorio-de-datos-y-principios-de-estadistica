@@ -10,6 +10,43 @@
   <link rel="stylesheet" href="index_files/reveal.js-3.3.0.1/css/reveal.css"/>
 
 
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
 
 <link rel="stylesheet" href="index_files/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
 
@@ -460,9 +497,208 @@ Joshua Kunst, Septiembre 2017
 </div></h2>
 </section>
 
-<section class="slide level2">
+<section><section id="que-haremos" class="titleslide slide level1"><h1>Qué haremos?</h1></section><section id="que-haremos-1" class="slide level2">
+<h2>Que haremos?</h2>
+<ul>
+<li class="fragment">Introducción</li>
+<li class="fragment">Análsis Exploratorio de Datos (AED)</li>
+<li class="fragment">Estadística Descriptiva (ED)</li>
+<li class="fragment">Estudiar Ejemplos<span class="fragment">, hacer ejemplos</span> <span class="fragment">y vivir ejemplos</span></li>
+</ul>
+</section></section>
+<section><section id="introduccion" class="titleslide slide level1"><h1>Introducción</h1></section><section id="introduccion-1" class="slide level2">
+<h2>Introducción</h2>
+<p><img src="http://r4ds.had.co.nz/diagrams/data-science.png" /></p>
+<p>(Fuente: R for Data Science, Wickham &amp; Grolemund)</p>
+</section><section id="introduccion-2" class="slide level2">
+<h2>Introducción</h2>
+<p>Antes de <strong>explicar</strong> debemos <strong>entender</strong></p>
+<p>El Análisis <strong>Exploratorio</strong> y la Estadística <strong>Descriptiva</strong> son parte clave para el entendimiento</p>
+</section><section id="introduccion-3" class="slide level2">
+<h2>Introducción</h2>
+<p>AED y ED van muy de la mano.</p>
+<p>Uno el el fin y el otro es una herramienta para lograr dicho fin.</p>
+</section><section id="prerequisitos" class="slide level2">
+<h2>Prerequisitos</h2>
+<p>Antes de partir necesitamos:</p>
+<ul>
+<li class="fragment">Entusiasmo</li>
+<li class="fragment">Mantener la mente abierta</li>
+<li class="fragment">Familiarizado con <code>ggplot2</code> y <code>dplyr</code></li>
+</ul>
+</section></section>
+<section><section id="analisis-exploratorio-de-datos" class="titleslide slide level1"><h1>Análisis Exploratorio de Datos</h1></section><section id="aed" class="slide level2">
+<h2>AED</h2>
+<p>No existe definición formal con reglas a seguir. Es un <strong>estado mental</strong></p>
+<ul>
+<li class="fragment">Generar preguntas acerca de los datos</li>
+<li class="fragment">Buscar respuestas visualizando, transformando los datos</li>
+<li class="fragment">Hacer nuevas preguntas a partir de lo aprendido</li>
+</ul>
+<p><span class="fragment"><strong>Generar conocimiento</strong></span></p>
+</section><section id="aed-1" class="slide level2">
+<h2>AED</h2>
+<p>Generar conocimiento no solo implica la información que tratan de medir los datos</p>
+<p><span class="fragment">Este conocimiento puede estar también en conocer si los datos fueron bien medidos: <em>validar calidad de los datos</em></span></p>
+</section><section id="visualizando-distribuciones" class="slide level2 right white" data-background-iframe="vis-dis.html">
+<h2>Visualizando Distribuciones</h2>
+</section><section id="distribucion" class="slide level2">
+<h2>Distribución</h2>
+<p>Distribución se relaciona a la forma que varían los datos de medición en medición.</p>
+<p><span class="fragment">Estudiando la forma de como se distribuyen los datos podemos ver cuales son los más comunes, o ver si exsiten casos raros<span></p>
+</section><section id="dataset-legos" class="slide level2 left white" data-background="http://media-cdn.timesfreepress.com/img/photos/2016/07/25/1469464845_0727MfeatLibrary1-C_t1070_h5be62d5b4b340aded4d6baf5bd671ee4fd6571f4.jpg">
+<h2>Dataset Legos</h2>
+</section><section id="leyendo-datos" class="slide level2">
+<h2>Leyendo datos</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 
-</section>
+legos &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/seankross/lego/master/data-tidy/legosets.csv&quot;</span>)
+<span class="co"># primer paso! paso #1</span>
+<span class="kw">glimpse</span>(legos)</code></pre></div>
+<pre><code>## Observations: 6,172
+## Variables: 14
+## $ Item_Number  &lt;chr&gt; &quot;10246&quot;, &quot;10247&quot;, &quot;10248&quot;, &quot;10249&quot;, &quot;10581&quot;, &quot;105...
+## $ Name         &lt;chr&gt; &quot;Detective&#39;s Office&quot;, &quot;Ferris Wheel&quot;, &quot;Ferrari F4...
+## $ Year         &lt;int&gt; 2015, 2015, 2015, 2015, 2015, 2015, 2015, 2015, 2...
+## $ Theme        &lt;chr&gt; &quot;Advanced Models&quot;, &quot;Advanced Models&quot;, &quot;Advanced M...
+## $ Subtheme     &lt;chr&gt; &quot;Modular Buildings&quot;, &quot;Fairground&quot;, &quot;Vehicles&quot;, &quot;W...
+## $ Pieces       &lt;int&gt; 2262, 2464, 1158, 898, 13, 39, 32, 105, 13, 11, 5...
+## $ Minifigures  &lt;int&gt; 6, 10, NA, NA, 1, 2, 2, 3, 2, 2, 3, 1, NA, NA, NA...
+## $ Image_URL    &lt;chr&gt; &quot;http://images.brickset.com/sets/images/10246-1.j...
+## $ GBP_MSRP     &lt;dbl&gt; 132.99, 149.99, 69.99, 59.99, 9.99, 16.99, 19.99,...
+## $ USD_MSRP     &lt;dbl&gt; 159.99, 199.99, 99.99, 79.99, 9.99, 19.99, 24.99,...
+## $ CAD_MSRP     &lt;dbl&gt; 199.99, 229.99, 119.99, NA, 12.99, 24.99, 29.99, ...
+## $ EUR_MSRP     &lt;dbl&gt; 149.99, 179.99, 89.99, 69.99, 9.99, 19.99, 24.99,...
+## $ Packaging    &lt;chr&gt; &quot;Box&quot;, &quot;Box&quot;, &quot;Box&quot;, &quot;Box&quot;, &quot;Box&quot;, &quot;Box&quot;, &quot;Box&quot;, ...
+## $ Availability &lt;chr&gt; &quot;Retail - limited&quot;, &quot;Retail - limited&quot;, &quot;LEGO exc...</code></pre>
+</section><section id="explorando-variables-discretas" class="slide level2">
+<h2>Explorando Variables Discretas</h2>
+<p>¿Cuántos temas hay?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">legos <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(Theme, <span class="dt">sort =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## # A tibble: 115 x 2
+##                      Theme     n
+##                      &lt;chr&gt; &lt;int&gt;
+##  1                   Duplo   471
+##  2               Star Wars   379
+##  3                    Town   314
+##  4 Collectable Minifigures   311
+##  5                    City   282
+##  6                Bionicle   276
+##  7                 Technic   243
+##  8                 Creator   219
+##  9                  Castle   206
+## 10                  Racers   195
+## # ... with 105 more rows</code></pre>
+</section><section id="explorando-variables-discretas-1" class="slide level2">
+<h2>Explorando Variables Discretas</h2>
+<p>¿Cuáles son los tipos de envoltorio?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">legos <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(Packaging, <span class="dt">sort =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## # A tibble: 14 x 2
+##                Packaging     n
+##                    &lt;chr&gt; &lt;int&gt;
+##  1                   Box  3102
+##  2         Not specified  1747
+##  3               Polybag   619
+##  4             Foil pack   291
+##  5          Blister pack   100
+##  6              Canister    78
+##  7           Loose Parts    72
+##  8                   Tub    40
+##  9                Bucket    36
+## 10                 Other    36
+## 11        Shrink-wrapped    18
+## 12 Box with backing card    17
+## 13           Plastic box    10
+## 14                   Tag     6</code></pre>
+</section><section id="explorando-variables-discretas-2" class="slide level2">
+<h2>Explorando Variables Discretas</h2>
+<p>¿Cuáles son los tipos de envoltorio?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(Packaging))</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-5-1.png" width="480" /></p>
+</section><section id="explorando-variables-discretas-3" class="slide level2">
+<h2>Explorando Variables Discretas</h2>
+<p>¿Y esos ejes?</p>
+<p><br></p>
+<p><img src="https://i.giphy.com/media/tu54GM19sqJOw/giphy.webp" onerror="this.onerror=null;this.src='https://i.giphy.com/tu54GM19sqJOw.gif';" alt=""></p>
+</section><section id="explorando-variables-discretas-4" class="slide level2">
+<h2>Explorando Variables Discretas</h2>
+<p>¿Y esos ejes?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(Packaging)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_flip</span>() <span class="co"># rotar :D</span></code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-6-1.png" width="480" /></p>
+</section><section id="explorando-variables-continuas" class="slide level2">
+<h2>Explorando Variables Continuas</h2>
+<p>¿Desde cuándo se han vendido legos?*</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(Year))</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-7-1.png" width="480" /></p>
+</section><section id="explorando-variables-continuas-1" class="slide level2">
+<h2>Explorando Variables Continuas</h2>
+<p>¿Cuántas piezas traen los sets?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(Pieces))</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-8-1.png" width="480" /></p>
+</section><section id="explorando-variables-continuas-2" class="slide level2">
+<h2>Explorando Variables Continuas</h2>
+<p>¿Cuántas minifuguras traen los sets?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(Minifigures))</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-9-1.png" width="480" /></p>
+</section><section id="valores-comunes-valores-raros" class="slide level2">
+<h2>Valores comunes, valores raros</h2>
+<p>En el caso anterior, ¿Cuál es el número más comun de figuras? ¿Cuántos sets traen más de 25 figuras? ¿Cuáles son?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">legos <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(Minifigures <span class="op">&gt;</span><span class="st"> </span><span class="dv">25</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(Name, Year, Theme, Minifigures)</code></pre></div>
+<pre><code>## # A tibble: 5 x 4
+##                            Name  Year     Theme Minifigures
+##                           &lt;chr&gt; &lt;int&gt;     &lt;chr&gt;       &lt;int&gt;
+## 1     The Battle for Helms Deep  2013     Games          28
+## 2 Star Wars: The Battle of Hoth  2012     Games          32
+## 3             Community Workers  2006 Education          31
+## 4             Community Workers  2005 Education          31
+## 5             Community Workers  1996     Dacta          30</code></pre>
+</section></section>
+<section><section id="estadistica-descriptiva" class="titleslide slide level1"><h1>Estadística Descriptiva</h1></section><section id="ed" class="slide level2">
+<h2>ED</h2>
+<p>Conjunto de procedimientos para <strong>resumir</strong> datos.</p>
+<ul>
+<li class="fragment">Generar gráficos</li>
+<li class="fragment">Realizar tablas</li>
+<li class="fragment">Generar medidas de resumen</li>
+</ul>
+<p><span class="fragment"><strong>Sintetizar información</strong><span></p>
+</section><section id="medidas-de-resumen" class="slide level2">
+<h2>Medidas de Resumen</h2>
+</section></section>
+<section><section id="ejericios" class="titleslide slide level1"><h1>Ejericios</h1></section><section id="datos" class="slide level2">
+<h2>Datos</h2>
+<p>seismic monitor data api <a href="https://earthquake.usgs.gov/fdsnws/event/1/" class="uri">https://earthquake.usgs.gov/fdsnws/event/1/</a></p>
+</section><section id="datos-1" class="slide level2">
+<h2>Datos</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+
+data &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;https://earthquake.usgs.gov/fdsnws/event/1/query?starttime=2017-09-01&amp;endtime=2017-09-31&amp;format=text&quot;</span>, <span class="dt">delim =</span> <span class="st">&quot;|&quot;</span>)
+<span class="kw">glimpse</span>(data)</code></pre></div>
+<pre><code>## Observations: 7,556
+## Variables: 13
+## $ `#EventID`        &lt;chr&gt; &quot;ak16896672&quot;, &quot;ci38009904&quot;, &quot;ci38009896&quot;, &quot;c...
+## $ Time              &lt;dttm&gt; 2017-09-25 03:52:19, 2017-09-25 03:46:33, 2...
+## $ Latitude          &lt;dbl&gt; 63.27270, 34.04883, 33.99467, 33.50817, 34.0...
+## $ Longitude         &lt;dbl&gt; -150.6677, -116.8150, -117.0042, -116.7908, ...
+## $ `Depth/km`        &lt;dbl&gt; 134.80, 13.06, 16.99, 6.38, 11.59, 13.90, 12...
+## $ Author            &lt;chr&gt; &quot;ak&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;a...
+## $ Catalog           &lt;chr&gt; &quot;ak&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;a...
+## $ Contributor       &lt;chr&gt; &quot;ak&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;a...
+## $ ContributorID     &lt;chr&gt; &quot;ak16896672&quot;, &quot;ci38009904&quot;, &quot;ci38009896&quot;, &quot;c...
+## $ MagType           &lt;chr&gt; &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;m...
+## $ Magnitude         &lt;dbl&gt; 2.40, 1.64, 0.32, 0.90, 1.06, 0.42, 1.15, 2....
+## $ MagAuthor         &lt;chr&gt; &quot;ak&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;a...
+## $ EventLocationName &lt;chr&gt; &quot;87km W of Cantwell, Alaska&quot;, &quot;15km NNE of B...</code></pre>
+</section></section>
+<section><section id="creditos" class="titleslide slide level1"><h1>Créditos</h1></section></section>
     </div>
   </div>
 
@@ -493,6 +729,7 @@ Joshua Kunst, Septiembre 2017
 
         // Optional reveal.js plugins
         dependencies: [
+          { src: 'index_files/reveal.js-3.3.0.1/plugin/zoom-js/zoom.js', async: true },
         ]
       });
     </script>

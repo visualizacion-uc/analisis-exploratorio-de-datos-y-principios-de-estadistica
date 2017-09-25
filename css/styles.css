@@ -51,11 +51,17 @@ body {
 }
 
 /* some colors for title slides */
-.reveal .white > h1{ color: white;}
-.reveal .black > h1 { color: black;}
+.reveal .white > h1,
+.reveal .white > h2 { color: white;}
+.reveal .black > h1,
+.reveal .black > h2 { color: black;}
 
-.reveal .left  > h1 { text-align: left; }
-.reveal .right > h1 { text-align: right; }
+.reveal .left  > h1,
+.reveal .left  > h2 { text-align: left; }
+.reveal .right > h1,
+.reveal .right > h2 { text-align: right; }
+
+.reveal h2 { padding-bottom: .25em; }
 
 
 /* Styles for text p li */
@@ -66,11 +72,10 @@ body {
   font-size: 80%;
   letter-spacing: 0;
 }
-
 .reveal p { padding-top: 0.25em;}
 
 /* ul li lists with more space */
-.reveal section ul { padding-top: 1.75em; list-style: none;}
+.reveal section ul { padding-top: 1.25em; padding-bottom: 1.25em; list-style: none;}
 .reveal section li { padding: 0.5em; }
 .reveal section li:before {
   content: "\f101"; /* FontAwesome Unicode */
