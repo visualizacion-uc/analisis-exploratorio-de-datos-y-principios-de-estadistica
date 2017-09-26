@@ -6,16 +6,23 @@ library(jbkmisc)
 library(scales)
 library(stringr)
 
-knitr::opts_chunk$set(message = FALSE, warning = FALSE, echo = TRUE)
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  echo = TRUE,
+  dev = "svg"
+  )
 options(highcharter.theme = hc_theme_smpl(chart = list(backgroundColor = "transparent")))
 
 
-# ggplot ------------------------------------------------------------------
-theme_set(theme_jbk(base_family = NA, plot_margin = margin(10, 10, 10, 10)))
+main_color <- "#E53935"
 
-update_geom_defaults("line",  list(colour = "#03a9f4", size = 1.05))
-update_geom_defaults("point", list(colour = "#03a9f4", size = 3))
-update_geom_defaults("bar",   list(fill = "#03a9f4"))
+# ggplot ------------------------------------------------------------------
+theme_set(theme_jbk(base_family = "Roboto Condensed", plot_margin = margin(10, 10, 10, 10)))
+
+update_geom_defaults("line",  list(colour = main_color, size = 1.05))
+update_geom_defaults("point", list(colour = main_color, size = 3))
+update_geom_defaults("bar",   list(fill = main_color))
 update_geom_defaults("text",  list(size = 4, colour = "#666666"))
 
 # helpers -----------------------------------------------------------------

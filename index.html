@@ -505,14 +505,14 @@ Joshua Kunst, Septiembre 2017
 <li>Estadística Descriptiva (ED)
 <ul>
 <li>Medidas de Tendencia</li>
-<li>Selección de gráficos</li>
+<li>Visualización de datos</li>
 </ul></li>
-<li>Estudiar Ejemplos <span class="fragment">, hacer ejemplos</span><span class="fragment">, <strong>equivocarnos</strong></span> <span class="fragment">, <strong>corregirnos</strong></span><span class="fragment">, vivir ejemplos</span></li>
+<li>Estudiar Ejemplos <span class="fragment">, hacer ejemplos</span><span class="fragment">, <strong>equivocarnos</strong></span><span class="fragment">, <strong>corregirnos</strong></span><span class="fragment">, vivir ejemplos</span></li>
 </ul>
 </section></section>
 <section><section id="introduccion" class="titleslide slide level1"><h1>Introducción</h1></section><section id="introduccion-1" class="slide level2">
 <h2>Introducción</h2>
-<p><img src="https://visualizacion-uc.github.io/procesamiento-y-analisis-de-datos/clases/img/tidy-data.png" /></p>
+<p><img src="https://visualizacion-uc.github.io/procesamiento-y-analisis-de-datos/clases/img/tidy-data.png" height="350px" /></p>
 <p>Fuente: R for Data Science, Wickham &amp; Grolemund</p>
 </section><section id="introduccion-2" class="slide level2">
 <h2>Introducción</h2>
@@ -521,7 +521,7 @@ Joshua Kunst, Septiembre 2017
 <p><span class="fragment"><span> <i class="fa fa-quote-left"></i> </span> Escuchar lo que los datos nos hablan</span></p>
 </section><section id="introduccion-3" class="slide level2">
 <h2>Introducción</h2>
-<p>AED y ED van muy de la mano.</p>
+<p>AED y ED van de la mano.</p>
 <p>Uno el el fin y el otro es una herramienta para lograr dicho fin.</p>
 </section><section id="glosario" class="slide level2">
 <h2>Glosario</h2>
@@ -533,8 +533,9 @@ Joshua Kunst, Septiembre 2017
 </section><section id="glosario-1" class="slide level2">
 <h2>Glosario</h2>
 <ul>
-<li><strong>Datos tabulados</strong> es un conjunto de <em>valores</em> cada uno asociado a una <em>variable</em> y una <em>observación</em> <img src="http://garrettgman.github.io/images/tidy-1.png" /></li>
+<li><strong>Datos tabulados</strong> es un conjunto de <em>valores</em> cada uno asociado a una <em>variable</em> y una <em>observación</em></li>
 </ul>
+<p><img src="http://garrettgman.github.io/images/tidy-1.png" /></p>
 </section><section id="prerequisitos" class="slide level2">
 <h2>Prerequisitos</h2>
 <p>Antes de partir necesitamos:</p>
@@ -555,7 +556,6 @@ Joshua Kunst, Septiembre 2017
 <p><span class="fragment"><strong>Generar conocimiento</strong></span></p>
 </section><section id="aed" class="slide level2">
 <h2>AED</h2>
-<p><br></p>
 <p>Generar conocimiento no solo implica extraer la información que tratan de medir los datos</p>
 <p><span class="fragment">Este conocimiento puede estar también en conocer si los datos fueron bien medidos o existen algunos registros datos mal registrados</span></p>
 <p><span class="fragment"><strong>Validar calidad de los datos</strong></span></p>
@@ -563,7 +563,6 @@ Joshua Kunst, Septiembre 2017
 <h2>Visualizando Distribuciones</h2>
 </section><section id="distribucion" class="slide level2">
 <h2>Distribución</h2>
-<p><br></p>
 <p>Distribución se relaciona a la forma que varían los datos de medición en medición.</p>
 <p><span class="fragment">Estudiando la forma de como se distribuyen los datos podemos ver cuales son los más comunes, o ver si exsiten casos raros<span></p>
 <p><span class="fragment">Y variará principalmente del tipo de variable analizada: <strong>categórica</strong> o <strong>continua</strong></span></p>
@@ -615,15 +614,14 @@ legos &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class
 <p>¿Cuántos temas hay?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(Theme))</code></pre></div>
-<p><img src="index_files/figure-revealjs/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-5-1.svg" width="576" /></p>
 </section><section id="explorando-variables-discretas-2" class="slide level2">
 <h2>Explorando Variables Discretas</h2>
 <p>¿Cuántos temas hay?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(forcats)
-legos &lt;-<span class="st"> </span><span class="kw">mutate</span>(legos, <span class="dt">Theme2 =</span> <span class="kw">fct_lump</span>(Theme, <span class="dt">n =</span> <span class="dv">10</span>))
-<span class="kw">ggplot</span>(legos) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(Theme2))</code></pre></div>
-<p><img src="index_files/figure-revealjs/unnamed-chunk-5-1.png" width="672" /></p>
+legos &lt;-<span class="st"> </span><span class="kw">mutate</span>(legos, <span class="dt">Theme2 =</span> <span class="kw">fct_lump</span>(Theme, <span class="dt">n =</span> <span class="dv">5</span>))
+<span class="kw">ggplot</span>(legos) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(Theme2))</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-6-1.svg" width="576" /></p>
 </section><section id="explorando-variables-discretas-3" class="slide level2">
 <h2>Explorando Variables Discretas</h2>
 <p>¿Cuáles son los tipos de envoltorio?</p>
@@ -650,45 +648,43 @@ legos &lt;-<span class="st"> </span><span class="kw">mutate</span>(legos, <span 
 <p>¿Cuáles son los tipos de embalajes?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(Packaging))</code></pre></div>
-<p><img src="index_files/figure-revealjs/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-8-1.svg" width="576" /></p>
 </section><section id="explorando-variables-discretas-5" class="slide level2">
 <h2>Explorando Variables Discretas</h2>
 <p>¿Y esas etiquetas?</p>
-<p><br></p>
-<p><img src="https://i.giphy.com/media/tu54GM19sqJOw/giphy.webp" onerror="this.onerror=null;this.src='https://i.giphy.com/tu54GM19sqJOw.gif';" alt=""></p>
+<p><img src="https://i.giphy.com/media/tu54GM19sqJOw/giphy.webp" onerror="this.onerror=null;this.src='https://i.giphy.com/tu54GM19sqJOw.gif';" alt="", style="width: 500px;"></p>
 </section><section id="explorando-variables-discretas-6" class="slide level2">
 <h2>Explorando Variables Discretas</h2>
 <p>¿Y esas etiquetas?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(Packaging)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">coord_flip</span>() <span class="co"># rotar :D</span></code></pre></div>
-<p><img src="index_files/figure-revealjs/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-9-1.svg" width="576" /></p>
 </section><section id="explorando-variables-discretas-7" class="slide level2">
 <h2>Explorando Variables Discretas</h2>
 <p>¿Y esas etiquetas?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">legos &lt;-<span class="st"> </span><span class="kw">mutate</span>(legos, <span class="dt">Packaging =</span> <span class="kw">fct_infreq</span>(Packaging)) <span class="co"># ordenar</span>
 <span class="kw">ggplot</span>(legos) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(Packaging)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">coord_flip</span>() <span class="co"># rotar :D</span></code></pre></div>
-<p><img src="index_files/figure-revealjs/unnamed-chunk-9-1.png" width="672" /></p>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(Packaging)) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>() <span class="co"># rotar :D</span></code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-10-1.svg" width="576" /></p>
 </section><section id="explorando-variables-continuas" class="slide level2">
 <h2>Explorando Variables Continuas</h2>
 <p>¿Desde cuándo se <em>tenemos registros</em> de sets de legos?*</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(Year))</code></pre></div>
-<p><img src="index_files/figure-revealjs/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-11-1.svg" width="576" /></p>
 </section><section id="explorando-variables-continuas-1" class="slide level2">
 <h2>Explorando Variables Continuas</h2>
 <p>¿Cuántas piezas traen los sets?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(Pieces))</code></pre></div>
-<p><img src="index_files/figure-revealjs/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-12-1.svg" width="576" /></p>
 </section><section id="explorando-variables-continuas-2" class="slide level2">
 <h2>Explorando Variables Continuas</h2>
 <p>¿Cuántas minifuguras traen los sets?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(Minifigures))</code></pre></div>
-<p><img src="index_files/figure-revealjs/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-13-1.svg" width="576" /></p>
 </section><section id="valores-comunes-valores-raros" class="slide level2">
 <h2>Valores comunes, valores raros</h2>
 <p>En el caso anterior, ¿Cuál es el número más comun de figuras? ¿Cuántos sets traen más de 25 figuras? ¿Cuáles son?</p>
@@ -714,7 +710,6 @@ legos &lt;-<span class="st"> </span><span class="kw">mutate</span>(legos, <span 
 <p><span class="fragment"><strong>Sintetizar información</strong><span></p>
 </section><section id="medidas-de-tendencia" class="slide level2">
 <h2>Medidas de Tendencia</h2>
-<p><br></p>
 <p>Son indicadores (generalmente un número) obtenidos de los datos que <strong>resumen</strong> información y nos hablan de alguna característica de la distribución de la variable.</p>
 </section><section id="medidas-de-tendencia-1" class="slide level2">
 <h2>Medidas de Tendencia</h2>
@@ -738,21 +733,21 @@ legos &lt;-<span class="st"> </span><span class="kw">mutate</span>(legos, <span 
 
 data &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;https://earthquake.usgs.gov/fdsnws/event/1/query?starttime=2017-09-01&amp;endtime=2017-09-31&amp;format=text&quot;</span>, <span class="dt">delim =</span> <span class="st">&quot;|&quot;</span>)
 <span class="kw">glimpse</span>(data)</code></pre></div>
-<pre><code>## Observations: 7,818
+<pre><code>## Observations: 8,049
 ## Variables: 13
-## $ `#EventID`        &lt;chr&gt; &quot;nc72898896&quot;, &quot;nc72898876&quot;, &quot;ak16904315&quot;, &quot;n...
-## $ Time              &lt;dttm&gt; 2017-09-25 19:50:26, 2017-09-25 19:36:08, 2...
-## $ Latitude          &lt;dbl&gt; 38.80883, 40.33367, 59.75950, 38.83617, 33.4...
-## $ Longitude         &lt;dbl&gt; -122.7958, -124.7963, -136.6956, -122.7857, ...
-## $ `Depth/km`        &lt;dbl&gt; 2.23, 4.59, 0.00, 1.75, 16.68, 1.79, 4.14, 1...
-## $ Author            &lt;chr&gt; &quot;nc&quot;, &quot;nc&quot;, &quot;ak&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;h...
-## $ Catalog           &lt;chr&gt; &quot;nc&quot;, &quot;nc&quot;, &quot;ak&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;h...
-## $ Contributor       &lt;chr&gt; &quot;nc&quot;, &quot;nc&quot;, &quot;ak&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;h...
-## $ ContributorID     &lt;chr&gt; &quot;nc72898896&quot;, &quot;nc72898876&quot;, &quot;ak16904315&quot;, &quot;n...
-## $ MagType           &lt;chr&gt; &quot;md&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;md&quot;, &quot;ml&quot;, &quot;md&quot;, &quot;ml&quot;, &quot;m...
-## $ Magnitude         &lt;dbl&gt; 0.87, 3.11, 1.60, 1.45, 0.94, 0.80, 0.43, 1....
-## $ MagAuthor         &lt;chr&gt; &quot;nc&quot;, &quot;nc&quot;, &quot;ak&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;h...
-## $ EventLocationName &lt;chr&gt; &quot;4km NW of The Geysers, California&quot;, &quot;52km W...</code></pre>
+## $ `#EventID`        &lt;chr&gt; &quot;ak16906350&quot;, &quot;nc72899026&quot;, &quot;ak16906345&quot;, &quot;a...
+## $ Time              &lt;dttm&gt; 2017-09-26 03:03:42, 2017-09-26 02:38:28, 2...
+## $ Latitude          &lt;dbl&gt; 59.83070, 37.45284, 59.79520, 62.61100, 33.2...
+## $ Longitude         &lt;dbl&gt; -136.5785, -118.8248, -136.5684, -149.3760, ...
+## $ `Depth/km`        &lt;dbl&gt; 0.10, 2.49, 0.00, 0.70, 39.49, 1.44, 10.40, ...
+## $ Author            &lt;chr&gt; &quot;ak&quot;, &quot;nc&quot;, &quot;ak&quot;, &quot;ak&quot;, &quot;ci&quot;, &quot;uw&quot;, &quot;ak&quot;, &quot;u...
+## $ Catalog           &lt;chr&gt; &quot;ak&quot;, &quot;nc&quot;, &quot;ak&quot;, &quot;ak&quot;, &quot;ci&quot;, &quot;uw&quot;, &quot;ak&quot;, &quot;u...
+## $ Contributor       &lt;chr&gt; &quot;ak&quot;, &quot;nc&quot;, &quot;ak&quot;, &quot;ak&quot;, &quot;ci&quot;, &quot;uw&quot;, &quot;ak&quot;, &quot;u...
+## $ ContributorID     &lt;chr&gt; &quot;ak16906350&quot;, &quot;nc72899026&quot;, &quot;ak16906345&quot;, &quot;a...
+## $ MagType           &lt;chr&gt; &quot;ml&quot;, &quot;md&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;m...
+## $ Magnitude         &lt;dbl&gt; 2.40, 1.63, 1.90, 1.40, 0.77, 0.42, 1.20, 1....
+## $ MagAuthor         &lt;chr&gt; &quot;ak&quot;, &quot;nc&quot;, &quot;ak&quot;, &quot;ak&quot;, &quot;ci&quot;, &quot;uw&quot;, &quot;ak&quot;, &quot;u...
+## $ EventLocationName &lt;chr&gt; &quot;82km WNW of Skagway, Alaska&quot;, &quot;25km SSE of ...</code></pre>
 </section></section>
 <section><section id="creditos" class="titleslide slide level1"><h1>Créditos</h1></section></section>
     </div>

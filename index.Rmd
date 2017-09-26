@@ -12,8 +12,8 @@ output:
     center: false
     # center: true
     theme: simple
-    fig_width: 7
-    fig_height: 4
+    fig_width: 6
+    fig_height: 3.5
     reveal_options:
       slideNumber: true
       controls: false
@@ -34,16 +34,17 @@ source("R/setup.R")
 > - Análsis Exploratorio de Datos (AED)
 > - Estadística Descriptiva (ED)
 >      * Medidas de Tendencia
->      * Selección de gráficos
+>      * Visualización de datos
 > - Estudiar Ejemplos
-<span class="fragment">, hacer ejemplos</span><span class="fragment">, __equivocarnos__</span>
-<span class="fragment">, __corregirnos__</span><span class="fragment">, vivir ejemplos</span>
+<span class="fragment">, hacer ejemplos</span><span class="fragment">, __equivocarnos__</span><span class="fragment">, __corregirnos__</span><span class="fragment">, vivir ejemplos</span>
 
 # Introducción
 
 ## Introducción
 
-![](https://visualizacion-uc.github.io/procesamiento-y-analisis-de-datos/clases/img/tidy-data.png)
+```{r, out.height= "350px", echo=FALSE}
+knitr::include_graphics("https://visualizacion-uc.github.io/procesamiento-y-analisis-de-datos/clases/img/tidy-data.png")
+```
 
 Fuente: R for Data Science, Wickham & Grolemund
 
@@ -59,7 +60,7 @@ para el entendimiento
 
 ## Introducción
 
-AED y ED van muy de la mano. 
+AED y ED van de la mano. 
 
 Uno el el fin y el otro es una herramienta para 
 lograr dicho fin.
@@ -77,6 +78,7 @@ variable necesariamente- pero si en un mismo instante y a un mismo objeto.
 
 > - __Datos tabulados__ es un conjunto de _valores_ cada uno asociado
 a una _variable_ y una _observación_
+
 ![](http://garrettgman.github.io/images/tidy-1.png)
 
 ## Prerequisitos
@@ -101,8 +103,6 @@ No existe definición formal con reglas a seguir. Es un __estado mental__
 
 ## AED
 
-<br>
-
 Generar conocimiento no solo implica extraer la información que tratan de medir
 los datos
 
@@ -110,12 +110,9 @@ los datos
 
 <span class="fragment">__Validar calidad de los datos__</span>
 
-
 ## Visualizando Distribuciones { .right .white data-background-iframe="vis-dis.html" }
 
 ## Distribución
-
-<br>
 
 Distribución se relaciona a la forma que varían los datos de medición en 
 medición.
@@ -161,9 +158,8 @@ ggplot(legos) +
 
 ```{r}
 library(forcats)
-legos <- mutate(legos, Theme2 = fct_lump(Theme, n = 10))
-ggplot(legos) +
-  geom_bar(aes(Theme2))
+legos <- mutate(legos, Theme2 = fct_lump(Theme, n = 5))
+ggplot(legos) + geom_bar(aes(Theme2))
 ```
 
 ## Explorando Variables Discretas
@@ -187,9 +183,7 @@ ggplot(legos) +
 
 ¿Y esas etiquetas? 
 
-<br>
-
-<img src="https://i.giphy.com/media/tu54GM19sqJOw/giphy.webp" onerror="this.onerror=null;this.src='https://i.giphy.com/tu54GM19sqJOw.gif';" alt="">
+<img src="https://i.giphy.com/media/tu54GM19sqJOw/giphy.webp" onerror="this.onerror=null;this.src='https://i.giphy.com/tu54GM19sqJOw.gif';" alt="", style="width: 500px;">
 
 ## Explorando Variables Discretas
 
@@ -208,8 +202,7 @@ ggplot(legos) +
 ```{r}
 legos <- mutate(legos, Packaging = fct_infreq(Packaging)) # ordenar
 ggplot(legos) +
-  geom_bar(aes(Packaging)) +
-  coord_flip() # rotar :D
+  geom_bar(aes(Packaging)) + coord_flip() # rotar :D
 ```
 
 ## Explorando Variables Continuas
@@ -263,7 +256,7 @@ Conjunto de procedimientos para __resumir__ datos.
 
 ## Medidas de Tendencia 
 
-<br>
+
 
 Son indicadores (generalmente un número) obtenidos de los datos 
 que __resumen__ información y nos hablan de alguna característica de 
