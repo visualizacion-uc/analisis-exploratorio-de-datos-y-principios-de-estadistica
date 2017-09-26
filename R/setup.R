@@ -48,7 +48,7 @@ x <- c(rgamma(6000, 5, 5), rnorm(3000, 3, 1)) %>%
 
 hc <- hchart(x, color = "#21908C") %>% 
   hc_add_series(
-    data = df, type = "pie", center = c('70%', '50%'), size = 400,
+    data = df, type = "pie", center = c('70%', '50%'), size = 350,
     dataLabels = list(enabled = FALSE), 
     innerSize =  '60%', borderWidth = 0
   ) %>% 

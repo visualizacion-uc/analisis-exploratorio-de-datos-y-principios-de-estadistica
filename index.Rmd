@@ -52,18 +52,18 @@ Fuente: R for Data Science, Wickham & Grolemund
 
 Antes de __explicar__ debemos __entender__
 
+<span class="fragment">
 El Análisis __Exploratorio__ y la 
 Estadística __Descriptiva__ son parte clave 
-para el entendimiento
+para el entendimiento</span>
+
+<span class="fragment">
+AED y ED van de la mano. AED es el fin y ED una herramienta para 
+lograrlo
+</span>
 
 <span class="fragment">`r ico("quote-left")` Escuchar lo que los datos nos hablan</span>
 
-## Introducción
-
-AED y ED van de la mano. 
-
-Uno el el fin y el otro es una herramienta para 
-lograr dicho fin.
 
 
 ## Glosario
@@ -254,15 +254,37 @@ Conjunto de procedimientos para __resumir__ datos.
 
 <span class="fragment">__Sintetizar información__<span>
 
+## Glosario
+
+Tipos de Variables
+
+> - Categórica
+>      * Nominal. Especie: perro, gato
+>      * Ordinal. Satistacción bueno, malo, ...
+> - Cuantitativa
+>      * Discreta. # hijos: 0, 1, 2, ...
+>      * Continua. Peso; 3.54, 5.45
+
 ## Medidas de Tendencia 
-
-
 
 Son indicadores (generalmente un número) obtenidos de los datos 
 que __resumen__ información y nos hablan de alguna característica de 
-la distribución de la variable.
+la __distribución__ de la variable.
 
-## Medidas de Tendencia 
+## Medidas de Tendencia Central
+
+Nos señalan el valor en _torno al cual se concentran los datos_
+
+>- Media o Promedio: La suma de los datos dividido por la cantidad de los mismos
+>- Mediana: Es el valor que está al medio cuando los datos se ordenan
+>- Moda: Es el valor que más se repite. Este se usa cuando la variable es _discreta_
+
+## Medidas de Dispersión
+
+Son valores que nos describen la dispersión de los datos. Es decir, __que tan concentrados__ están:
+
+>- Desviación estándar: Mide el grado de dispersión en torno a la media
+>- Rango: Es el tamaño del intervalo que cubren los datos, el mayor valor menos el mínimo.
 
 ## Visualización de datos
 
@@ -271,6 +293,10 @@ la distribución de la variable.
 Se refiere a la representación gráfica de los datos codificando la información o atributos como: posición, tamaño, formas, colores
 
 ![](img/data-viz.jpg)
+
+## plot1
+
+## plot2
 
 ## Lollipop
 

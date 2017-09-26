@@ -517,12 +517,9 @@ Joshua Kunst, Septiembre 2017
 </section><section id="introduccion-2" class="slide level2">
 <h2>Introducción</h2>
 <p>Antes de <strong>explicar</strong> debemos <strong>entender</strong></p>
-<p>El Análisis <strong>Exploratorio</strong> y la Estadística <strong>Descriptiva</strong> son parte clave para el entendimiento</p>
+<p><span class="fragment"> El Análisis <strong>Exploratorio</strong> y la Estadística <strong>Descriptiva</strong> son parte clave para el entendimiento</span></p>
+<p><span class="fragment"> AED y ED van de la mano. AED es el fin y ED una herramienta para lograrlo </span></p>
 <p><span class="fragment"><span> <i class="fa fa-quote-left"></i> </span> Escuchar lo que los datos nos hablan</span></p>
-</section><section id="introduccion-3" class="slide level2">
-<h2>Introducción</h2>
-<p>AED y ED van de la mano.</p>
-<p>Uno el el fin y el otro es una herramienta para lograr dicho fin.</p>
 </section><section id="glosario" class="slide level2">
 <h2>Glosario</h2>
 <ul>
@@ -708,11 +705,32 @@ legos &lt;-<span class="st"> </span><span class="kw">mutate</span>(legos, <span 
 <li class="fragment">Visualización de datos</li>
 </ul>
 <p><span class="fragment"><strong>Sintetizar información</strong><span></p>
+</section><section id="glosario-2" class="slide level2">
+<h2>Glosario</h2>
+<p>Tipos de Variables</p>
+<ul>
+<li>Categórica
+<ul>
+<li>Nominal. Especie: perro, gato</li>
+<li>Ordinal. Satistacción bueno, malo, …</li>
+</ul></li>
+<li>Cuantitativa
+<ul>
+<li>Discreta. # hijos: 0, 1, 2, …</li>
+<li>Continua. Peso; 3.54, 5.45</li>
+</ul></li>
+</ul>
 </section><section id="medidas-de-tendencia" class="slide level2">
 <h2>Medidas de Tendencia</h2>
-<p>Son indicadores (generalmente un número) obtenidos de los datos que <strong>resumen</strong> información y nos hablan de alguna característica de la distribución de la variable.</p>
-</section><section id="medidas-de-tendencia-1" class="slide level2">
-<h2>Medidas de Tendencia</h2>
+<p>Son indicadores (generalmente un número) obtenidos de los datos que <strong>resumen</strong> información y nos hablan de alguna característica de la <strong>distribución</strong> de la variable.</p>
+</section><section id="medidas-de-tendencia-central" class="slide level2">
+<h2>Medidas de Tendencia Central</h2>
+<p>Nos señalan el valor en <em>torno al cual se concentran los datos</em></p>
+<ul>
+<li>Media o Promedio: La suma de los datos dividido por la cantidad de los mismos</li>
+<li>Mediana: Es el valor que está al medio cuando los datos se ordenan</li>
+<li>Moda: Es el valor que más se repite. Este se usa cuando la variable es <em>discreta</em></li>
+</ul>
 </section><section id="visualizacion-de-datos" class="slide level2">
 <h2>Visualización de datos</h2>
 </section><section id="visualizacion-de-datos-1" class="slide level2">
@@ -733,21 +751,21 @@ legos &lt;-<span class="st"> </span><span class="kw">mutate</span>(legos, <span 
 
 data &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;https://earthquake.usgs.gov/fdsnws/event/1/query?starttime=2017-09-01&amp;endtime=2017-09-31&amp;format=text&quot;</span>, <span class="dt">delim =</span> <span class="st">&quot;|&quot;</span>)
 <span class="kw">glimpse</span>(data)</code></pre></div>
-<pre><code>## Observations: 8,049
+<pre><code>## Observations: 8,130
 ## Variables: 13
-## $ `#EventID`        &lt;chr&gt; &quot;ak16906350&quot;, &quot;nc72899026&quot;, &quot;ak16906345&quot;, &quot;a...
-## $ Time              &lt;dttm&gt; 2017-09-26 03:03:42, 2017-09-26 02:38:28, 2...
-## $ Latitude          &lt;dbl&gt; 59.83070, 37.45284, 59.79520, 62.61100, 33.2...
-## $ Longitude         &lt;dbl&gt; -136.5785, -118.8248, -136.5684, -149.3760, ...
-## $ `Depth/km`        &lt;dbl&gt; 0.10, 2.49, 0.00, 0.70, 39.49, 1.44, 10.40, ...
-## $ Author            &lt;chr&gt; &quot;ak&quot;, &quot;nc&quot;, &quot;ak&quot;, &quot;ak&quot;, &quot;ci&quot;, &quot;uw&quot;, &quot;ak&quot;, &quot;u...
-## $ Catalog           &lt;chr&gt; &quot;ak&quot;, &quot;nc&quot;, &quot;ak&quot;, &quot;ak&quot;, &quot;ci&quot;, &quot;uw&quot;, &quot;ak&quot;, &quot;u...
-## $ Contributor       &lt;chr&gt; &quot;ak&quot;, &quot;nc&quot;, &quot;ak&quot;, &quot;ak&quot;, &quot;ci&quot;, &quot;uw&quot;, &quot;ak&quot;, &quot;u...
-## $ ContributorID     &lt;chr&gt; &quot;ak16906350&quot;, &quot;nc72899026&quot;, &quot;ak16906345&quot;, &quot;a...
-## $ MagType           &lt;chr&gt; &quot;ml&quot;, &quot;md&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;m...
-## $ Magnitude         &lt;dbl&gt; 2.40, 1.63, 1.90, 1.40, 0.77, 0.42, 1.20, 1....
-## $ MagAuthor         &lt;chr&gt; &quot;ak&quot;, &quot;nc&quot;, &quot;ak&quot;, &quot;ak&quot;, &quot;ci&quot;, &quot;uw&quot;, &quot;ak&quot;, &quot;u...
-## $ EventLocationName &lt;chr&gt; &quot;82km WNW of Skagway, Alaska&quot;, &quot;25km SSE of ...</code></pre>
+## $ `#EventID`        &lt;chr&gt; &quot;ci38011048&quot;, &quot;ak16909574&quot;, &quot;nc72899201&quot;, &quot;n...
+## $ Time              &lt;dttm&gt; 2017-09-26 13:36:42, 2017-09-26 13:23:17, 2...
+## $ Latitude          &lt;dbl&gt; 33.97550, 63.48350, 36.03117, 36.15167, 33.2...
+## $ Longitude         &lt;dbl&gt; -116.2753, -147.2151, -120.5957, -120.2213, ...
+## $ `Depth/km`        &lt;dbl&gt; 2.98, 25.10, 0.44, 11.60, 1.98, 6.72, 112.90...
+## $ Author            &lt;chr&gt; &quot;ci&quot;, &quot;ak&quot;, &quot;nc&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ak&quot;, &quot;c...
+## $ Catalog           &lt;chr&gt; &quot;ci&quot;, &quot;ak&quot;, &quot;nc&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ak&quot;, &quot;c...
+## $ Contributor       &lt;chr&gt; &quot;ci&quot;, &quot;ak&quot;, &quot;nc&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ak&quot;, &quot;c...
+## $ ContributorID     &lt;chr&gt; &quot;ci38011048&quot;, &quot;ak16909574&quot;, &quot;nc72899201&quot;, &quot;n...
+## $ MagType           &lt;chr&gt; &quot;ml&quot;, &quot;ml&quot;, &quot;md&quot;, &quot;md&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;m...
+## $ Magnitude         &lt;dbl&gt; 1.64, 2.40, 0.77, 2.28, 1.31, 0.52, 1.30, 0....
+## $ MagAuthor         &lt;chr&gt; &quot;ci&quot;, &quot;ak&quot;, &quot;nc&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ak&quot;, &quot;c...
+## $ EventLocationName &lt;chr&gt; &quot;18km S of Joshua Tree, CA&quot;, &quot;87km E of Cant...</code></pre>
 </section></section>
 <section><section id="creditos" class="titleslide slide level1"><h1>Créditos</h1></section></section>
     </div>
