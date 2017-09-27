@@ -158,7 +158,7 @@ ggplot(legos) +
 
 ```{r}
 library(forcats)
-legos <- mutate(legos, Theme2 = fct_lump(Theme, n = 5))
+legos <- mutate(legos, Theme2 = fct_lump(Theme, n = 7))
 ggplot(legos) + geom_bar(aes(Theme2))
 ```
 
@@ -473,9 +473,80 @@ tampoco comparten siempre la dificultad para ser __interpretados__</span>
 
 ## Visualizando Variables Categóricas
 
-pie vs bar
+La forma más usual de visualizar una variable categórica es
+a través de gráfico de __barras__ o __columnas__
 
-treemap
+
+```{r}
+legos2 <- filter(legos, Theme2 != "Other")
+ggplot(legos2) +
+  geom_bar(aes(Theme, fill = Theme))
+```
+
+## Visualizando Variables Categóricas
+
+También un muy usado es el __pie chart__
+
+```{r, echo=FALSE, fig.width=8, fig.height=5}
+library(gridExtra)
+p1 <- ggplot(legos2) +
+  geom_bar(aes(Theme, fill = Theme)) +
+  scale_fill_viridis(discrete = TRUE, option = "B") +
+  theme(legend.position = "none",
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank()) +
+  xlab(NULL) + ylab(NULL)
+
+p2 <- ggplot(legos2) +
+  geom_bar(aes(x = factor(1), fill = Theme), width = 1) +
+  scale_fill_viridis(discrete = TRUE, option = "B") + 
+  coord_polar(theta = "y") +
+  theme_null()
+
+grid.arrange(p1, p2, nrow = 1)
+```
+
+## Visualizando Variables Categóricas
+
+También un muy (__ab__)usado es el __pie chart__
+
+```{r, echo=FALSE, fig.width=8, fig.height=5}
+legos3 <- legos %>% 
+  mutate(Theme2 = fct_lump(Theme, n = 15)) %>% 
+  filter(Theme2 != "Other")
+
+p1 <- ggplot(legos3) +
+  geom_bar(aes(Theme, fill = Theme)) +
+  scale_fill_viridis(discrete = TRUE, option = "B") +
+  theme(legend.position = "none",
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank()) +
+  xlab(NULL) + ylab(NULL)
+
+p2 <- ggplot(legos3) +
+  geom_bar(aes(x = factor(1), fill = Theme), width = 1) +
+  scale_fill_viridis(discrete = TRUE, option = "B") + 
+  coord_polar(theta = "y") +
+  theme_null()
+
+grid.arrange(p1, p2, nrow = 1)
+```
+
+## Visualizando Variables Categóricas
+
+![viz](img/omgpie.gif)
+
+## Visualizando Variables Categóricas
+
+Treemap
 
 ## Visualizando Variables Numéricas
 
