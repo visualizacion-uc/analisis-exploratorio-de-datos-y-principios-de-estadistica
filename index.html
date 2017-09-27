@@ -874,8 +874,7 @@ d2 &lt;-<span class="st"> </span>datasaurus_dozen <span class="op">%&gt;%</span>
 <h2>Visualizando Variables Categóricas</h2>
 <p>La forma más usual de visualizar una variable categórica es a través de gráfico de <strong>barras</strong> o <strong>columnas</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">legos2 &lt;-<span class="st"> </span><span class="kw">filter</span>(legos, Theme2 <span class="op">!=</span><span class="st"> &quot;Other&quot;</span>)
-<span class="kw">ggplot</span>(legos2) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(Theme, <span class="dt">fill =</span> Theme))</code></pre></div>
+<span class="kw">ggplot</span>(legos2) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(Theme, <span class="dt">fill =</span> Theme))</code></pre></div>
 <p><img src="index_files/figure-revealjs/unnamed-chunk-23-1.svg" width="576" /></p>
 </section><section id="visualizando-variables-categoricas-1" class="slide level2">
 <h2>Visualizando Variables Categóricas</h2>

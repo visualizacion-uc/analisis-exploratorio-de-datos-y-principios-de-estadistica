@@ -18,7 +18,7 @@ options(highcharter.theme = hc_theme_smpl(chart = list(backgroundColor = "transp
 main_color <- "#E53935"
 
 # ggplot ------------------------------------------------------------------
-theme_set(theme_jbk(base_family = "Roboto Condensed", plot_margin = margin(10, 10, 10, 10)))
+theme_set(theme_jbk(base_family = "Roboto Condensed", plot_margin = margin(5, 5, 5, 5)))
 
 update_geom_defaults("line",  list(colour = main_color, size = 1.05))
 update_geom_defaults("point", list(colour = main_color, size = 3))

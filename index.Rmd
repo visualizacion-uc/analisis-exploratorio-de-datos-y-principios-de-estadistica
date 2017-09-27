@@ -479,8 +479,7 @@ a través de gráfico de __barras__ o __columnas__
 
 ```{r}
 legos2 <- filter(legos, Theme2 != "Other")
-ggplot(legos2) +
-  geom_bar(aes(Theme, fill = Theme))
+ggplot(legos2) + geom_bar(aes(Theme, fill = Theme))
 ```
 
 ## Visualizando Variables Categóricas
@@ -492,13 +491,7 @@ library(gridExtra)
 p1 <- ggplot(legos2) +
   geom_bar(aes(Theme, fill = Theme)) +
   scale_fill_viridis(discrete = TRUE, option = "B") +
-  theme(legend.position = "none",
-        panel.grid.major.x = element_blank(),
-        panel.grid.major.y = element_blank(),
-        axis.ticks.x = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.y = element_blank(),
-        axis.text.y = element_blank()) +
+  theme_null() + 
   xlab(NULL) + ylab(NULL)
 
 p2 <- ggplot(legos2) +
@@ -522,13 +515,7 @@ legos3 <- legos %>%
 p1 <- ggplot(legos3) +
   geom_bar(aes(Theme, fill = Theme)) +
   scale_fill_viridis(discrete = TRUE, option = "B") +
-  theme(legend.position = "none",
-        panel.grid.major.x = element_blank(),
-        panel.grid.major.y = element_blank(),
-        axis.ticks.x = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.y = element_blank(),
-        axis.text.y = element_blank()) +
+  theme_null() + 
   xlab(NULL) + ylab(NULL)
 
 p2 <- ggplot(legos3) +
