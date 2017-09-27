@@ -551,8 +551,8 @@ Joshua Kunst, Septiembre 2017
 <li class="fragment">Hacer nuevas preguntas a partir de lo aprendido</li>
 </ul>
 <p><span class="fragment"><strong>Generar conocimiento</strong></span></p>
-</section><section id="aed" class="slide level2">
-<h2>AED</h2>
+</section><section class="slide level2">
+
 <p>Generar conocimiento no solo implica extraer la información que tratan de medir los datos</p>
 <p><span class="fragment">Este conocimiento puede estar también en conocer si los datos fueron bien medidos o existen algunos registros datos mal registrados</span></p>
 <p><span class="fragment"><strong>Validar calidad de los datos</strong></span></p>
@@ -565,11 +565,14 @@ Joshua Kunst, Septiembre 2017
 <p><span class="fragment">Y variará principalmente del tipo de variable analizada: <strong>categórica</strong> o <strong>continua</strong></span></p>
 </section><section id="dataset-legos" class="slide level2 left white" data-background="http://media-cdn.timesfreepress.com/img/photos/2016/07/25/1469464845_0727MfeatLibrary1-C_t1070_h5be62d5b4b340aded4d6baf5bd671ee4fd6571f4.jpg">
 <h2>Dataset Legos</h2>
-</section><section id="leyendo-datos" class="slide level2">
-<h2>Leyendo datos</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+</section><section class="slide level2">
 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># cargar paquete con funciones que nos ayudarán</span>
+<span class="kw">library</span>(tidyverse)
+
+<span class="co"># leo datos desde una url</span>
 legos &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/seankross/lego/master/data-tidy/legosets.csv&quot;</span>)
+
 <span class="co"># primer paso! paso #1</span>
 <span class="kw">glimpse</span>(legos)</code></pre></div>
 <pre><code>## Observations: 6,172
@@ -588,8 +591,8 @@ legos &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class
 ## $ EUR_MSRP     &lt;dbl&gt; 149.99, 179.99, 89.99, 69.99, 9.99, 19.99, 24.99,...
 ## $ Packaging    &lt;chr&gt; &quot;Box&quot;, &quot;Box&quot;, &quot;Box&quot;, &quot;Box&quot;, &quot;Box&quot;, &quot;Box&quot;, &quot;Box&quot;, ...
 ## $ Availability &lt;chr&gt; &quot;Retail - limited&quot;, &quot;Retail - limited&quot;, &quot;LEGO exc...</code></pre>
-</section><section id="explorando-variables-discretas" class="slide level2">
-<h2>Explorando Variables Discretas</h2>
+</section><section class="slide level2">
+
 <p>¿Cuántos temas hay?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">legos <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(Theme, <span class="dt">sort =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## # A tibble: 115 x 2
@@ -606,21 +609,30 @@ legos &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class
 ##  9                  Castle   206
 ## 10                  Racers   195
 ## # ... with 105 more rows</code></pre>
-</section><section id="explorando-variables-discretas-1" class="slide level2">
-<h2>Explorando Variables Discretas</h2>
+</section><section class="slide level2">
+
 <p>¿Cuántos temas hay?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(Theme))</code></pre></div>
 <p><img src="index_files/figure-revealjs/unnamed-chunk-5-1.svg" width="576" /></p>
-</section><section id="explorando-variables-discretas-2" class="slide level2">
-<h2>Explorando Variables Discretas</h2>
+</section><section class="slide level2">
+
+<p>¿Cuántos temas hay?</p>
+<p><img src="https://i.giphy.com/media/JSueytO5O29yM/giphy.webp" onerror="this.onerror=null;this.src='https://i.giphy.com/JSueytO5O29yM.gif';" alt="" style="width:300px"></p>
+<p><span class="fragment">Muy <strong>seguro</strong> nos encontraremos con cosas de este estilo donde tenemos que modificar nuestros resultados</span></p>
+</section><section class="slide level2">
+
 <p>¿Cuántos temas hay?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(forcats)
+
+<span class="co"># creamos variable derivada que agrupe grupe las otras</span>
+<span class="co"># categorías que no corresponden a los 7 más grandes </span>
+<span class="co"># fct_lump</span>
 legos &lt;-<span class="st"> </span><span class="kw">mutate</span>(legos, <span class="dt">Theme2 =</span> <span class="kw">fct_lump</span>(Theme, <span class="dt">n =</span> <span class="dv">7</span>))
 <span class="kw">ggplot</span>(legos) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(Theme2))</code></pre></div>
 <p><img src="index_files/figure-revealjs/unnamed-chunk-6-1.svg" width="576" /></p>
-</section><section id="explorando-variables-discretas-3" class="slide level2">
-<h2>Explorando Variables Discretas</h2>
+</section><section class="slide level2">
+
 <p>¿Cuáles son los tipos de envoltorio?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">legos <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(Packaging, <span class="dt">sort =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## # A tibble: 14 x 2
@@ -640,56 +652,56 @@ legos &lt;-<span class="st"> </span><span class="kw">mutate</span>(legos, <span 
 ## 12 Box with backing card    17
 ## 13           Plastic box    10
 ## 14                   Tag     6</code></pre>
-</section><section id="explorando-variables-discretas-4" class="slide level2">
-<h2>Explorando Variables Discretas</h2>
+</section><section class="slide level2">
+
 <p>¿Cuáles son los tipos de envoltorio?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(Packaging))</code></pre></div>
 <p><img src="index_files/figure-revealjs/unnamed-chunk-8-1.svg" width="576" /></p>
-</section><section id="explorando-variables-discretas-5" class="slide level2">
-<h2>Explorando Variables Discretas</h2>
+</section><section class="slide level2">
+
 <p>¿Y esas etiquetas?</p>
 <p><img src="https://i.giphy.com/media/tu54GM19sqJOw/giphy.webp" onerror="this.onerror=null;this.src='https://i.giphy.com/tu54GM19sqJOw.gif';" alt="" style="width: 500px;"></p>
-</section><section id="explorando-variables-discretas-6" class="slide level2">
-<h2>Explorando Variables Discretas</h2>
+</section><section class="slide level2">
+
 <p>¿Y esas etiquetas?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(Packaging)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">coord_flip</span>() <span class="co"># rotar :D</span></code></pre></div>
 <p><img src="index_files/figure-revealjs/unnamed-chunk-9-1.svg" width="576" /></p>
-</section><section id="explorando-variables-discretas-7" class="slide level2">
-<h2>Explorando Variables Discretas</h2>
+</section><section class="slide level2">
+
 <p>¿Y esas etiquetas?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">legos &lt;-<span class="st"> </span><span class="kw">mutate</span>(legos, <span class="dt">Packaging =</span> <span class="kw">fct_infreq</span>(Packaging)) <span class="co"># ordenar</span>
 <span class="kw">ggplot</span>(legos) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(Packaging)) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>() <span class="co"># rotar :D</span></code></pre></div>
 <p><img src="index_files/figure-revealjs/unnamed-chunk-10-1.svg" width="576" /></p>
-</section><section id="explorando-variables-continuas" class="slide level2">
-<h2>Explorando Variables Continuas</h2>
+</section><section class="slide level2">
+
 <p>¿Desde cuándo se <em>tenemos registros</em> de sets de legos?*</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(Year))</code></pre></div>
 <p><img src="index_files/figure-revealjs/unnamed-chunk-11-1.svg" width="576" /></p>
-</section><section id="explorando-variables-continuas-1" class="slide level2">
-<h2>Explorando Variables Continuas</h2>
+</section><section class="slide level2">
+
 <p>¿Cuántas piezas traen los sets?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(Pieces))</code></pre></div>
 <p><img src="index_files/figure-revealjs/unnamed-chunk-12-1.svg" width="576" /></p>
-</section><section id="explorando-variables-continuas-2" class="slide level2">
-<h2>Explorando Variables Continuas</h2>
+</section><section class="slide level2">
+
 <p>¿Cuántas piezas traen los sets?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">legos &lt;-<span class="st"> </span><span class="kw">mutate</span>(legos, <span class="dt">Pieces2 =</span> <span class="kw">ifelse</span>(Pieces <span class="op">&gt;</span><span class="st"> </span><span class="dv">1000</span>, <span class="dv">1000</span>, Pieces))
 <span class="kw">ggplot</span>(legos) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(Pieces2))</code></pre></div>
 <p><img src="index_files/figure-revealjs/unnamed-chunk-13-1.svg" width="576" /></p>
-</section><section id="explorando-variables-continuas-3" class="slide level2">
-<h2>Explorando Variables Continuas</h2>
+</section><section class="slide level2">
+
 <p>¿Cuántas minifuguras traen los sets?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(Minifigures))</code></pre></div>
 <p><img src="index_files/figure-revealjs/unnamed-chunk-14-1.svg" width="576" /></p>
-</section><section id="valores-comunes-valores-raros" class="slide level2">
-<h2>Valores comunes, valores raros</h2>
+</section><section class="slide level2">
+
 <p>¿Cuántos sets traen más de 25 figuras? ¿Cuáles son?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">legos <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(Minifigures <span class="op">&gt;</span><span class="st"> </span><span class="dv">25</span>) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -718,13 +730,12 @@ legos &lt;-<span class="st"> </span><span class="kw">mutate</span>(legos, <span 
 <h2>Motivación</h2>
 <ul>
 <li>Te mandan un <em>inocente</em> archivo</li>
-<li>Mientras te piden que encuentres información relevante (para ayer)</li>
 <li>Te pieden que describas el contenido</li>
 <li>Y obtengas información relevante</li>
 <li>Claramente nunca habías visto este tipo de información</li>
 </ul>
-</section><section id="motivacion-1" class="slide level2">
-<h2>Motivación</h2>
+</section><section class="slide level2">
+
 <p>Lo abres y</p>
 <p><span class="fragment"> <img src="img/excel-data.png" /> <span></p>
 </section><section id="glosario-2" class="slide level2">
@@ -765,11 +776,11 @@ legos &lt;-<span class="st"> </span><span class="kw">mutate</span>(legos, <span 
 <h2>Ejemplo equipos</h2>
 </section><section id="datasaurus" class="slide level2 white right" data-background="img/datasaurus.jpg">
 <h2>DataSaurus</h2>
-</section><section id="datasaurus-1" class="slide level2">
-<h2>DataSaurus</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&quot;datasauRus&quot;)</span>
-<span class="kw">library</span>(datasauRus)
+</section><section class="slide level2">
 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(datasauRus) <span class="co"># install.packages(&quot;datasauRus&quot;)</span>
+
+<span class="co"># exploramos</span>
 datasaurus_dozen</code></pre></div>
 <pre><code>## # A tibble: 1,846 x 3
 ##    dataset       x       y
@@ -785,9 +796,10 @@ datasaurus_dozen</code></pre></div>
 ##  9    dino 28.9744 74.4872
 ## 10    dino 26.1538 71.4103
 ## # ... with 1,836 more rows</code></pre>
-</section><section id="datasaurus-2" class="slide level2">
-<h2>DataSaurus</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasaurus_dozen <span class="op">%&gt;%</span><span class="st"> </span>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># contamos categorías de la variable `dataset`</span>
+datasaurus_dozen <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">count</span>(dataset)</code></pre></div>
 <pre><code>## # A tibble: 13 x 2
 ##       dataset     n
@@ -805,10 +817,12 @@ datasaurus_dozen</code></pre></div>
 ## 11    v_lines   142
 ## 12 wide_lines   142
 ## 13    x_shape   142</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d1 &lt;-<span class="st"> </span>datasaurus_dozen <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(dataset <span class="op">==</span><span class="st"> &quot;away&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># creamos dos sub data frames</span>
+d1 &lt;-<span class="st"> </span>datasaurus_dozen <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(dataset <span class="op">==</span><span class="st"> &quot;away&quot;</span>)
 d2 &lt;-<span class="st"> </span>datasaurus_dozen <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(dataset <span class="op">==</span><span class="st"> &quot;dino&quot;</span>)</code></pre></div>
-</section><section id="datasaurus-3" class="slide level2">
-<h2>DataSaurus</h2>
+</section><section class="slide level2">
+
+<p>Exploramos la primera</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glimpse</span>(d1)</code></pre></div>
 <pre><code>## Observations: 142
 ## Variables: 3
@@ -827,8 +841,9 @@ d2 &lt;-<span class="st"> </span>datasaurus_dozen <span class="op">%&gt;%</span>
 ##    x_mean   y_mean     x_sd     y_sd     xy_corr
 ##     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
 ## 1 54.2661 47.83472 16.76982 26.93974 -0.06412835</code></pre>
-</section><section id="datasaurus-4" class="slide level2">
-<h2>DataSaurus</h2>
+</section><section class="slide level2">
+
+<p>Luego la segunda</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glimpse</span>(d2)</code></pre></div>
 <pre><code>## Observations: 142
 ## Variables: 3
@@ -847,61 +862,130 @@ d2 &lt;-<span class="st"> </span>datasaurus_dozen <span class="op">%&gt;%</span>
 ##     x_mean   y_mean     x_sd    y_sd     xy_corr
 ##      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;
 ## 1 54.26327 47.83225 16.76514 26.9354 -0.06447185</code></pre>
+</section><section class="slide level2">
+
+<p>Resultados muy similares ¿Asumimos que los datos distribuyen igual?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(d1) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(x, y))
+<span class="kw">ggplot</span>(d2) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(x, y))</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-21-1.svg" width="576" /></p>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasaurus_dozen <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(dataset) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(
+    <span class="dt">x_mean =</span> <span class="kw">mean</span>(x),
+    <span class="dt">y_mean =</span> <span class="kw">mean</span>(y),
+    <span class="dt">x_sd =</span> <span class="kw">sd</span>(x),
+    <span class="dt">y_sd =</span> <span class="kw">sd</span>(y),
+    <span class="dt">xy_corr =</span> <span class="kw">cor</span>(x, y)
+  )</code></pre></div>
+<pre><code>## # A tibble: 13 x 6
+##       dataset   x_mean   y_mean     x_sd     y_sd     xy_corr
+##         &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+##  1       away 54.26610 47.83472 16.76982 26.93974 -0.06412835
+##  2   bullseye 54.26873 47.83082 16.76924 26.93573 -0.06858639
+##  3     circle 54.26732 47.83772 16.76001 26.93004 -0.06834336
+##  4       dino 54.26327 47.83225 16.76514 26.93540 -0.06447185
+##  5       dots 54.26030 47.83983 16.76774 26.93019 -0.06034144
+##  6    h_lines 54.26144 47.83025 16.76590 26.93988 -0.06171484
+##  7 high_lines 54.26881 47.83545 16.76670 26.94000 -0.06850422
+##  8 slant_down 54.26785 47.83590 16.76676 26.93610 -0.06897974
+##  9   slant_up 54.26588 47.83150 16.76885 26.93861 -0.06860921
+## 10       star 54.26734 47.83955 16.76896 26.93027 -0.06296110
+## 11    v_lines 54.26993 47.83699 16.76996 26.93768 -0.06944557
+## 12 wide_lines 54.26692 47.83160 16.77000 26.93790 -0.06657523
+## 13    x_shape 54.26015 47.83972 16.76996 26.93000 -0.06558334</code></pre>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="kw">filter</span>(datasaurus_dozen, dataset <span class="op">!=</span><span class="st"> &quot;circle&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(x, y, <span class="dt">color =</span> dataset), <span class="dt">size =</span> <span class="fl">0.6</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>dataset) <span class="op">+</span><span class="st"> </span><span class="co"># hacer mini multiples segun la variable dataset</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-23-1.svg" width="576" /></p>
+</section><section class="slide level2">
+
+<p>Si te dicen que en una película a la mitad se pone entretenida, existen <strong>muchas</strong> películas que que cumplen dicha característica y no necesariamente habla de la que tu conoces que a la mitad se vuelve entretenida</p>
+<p><img src="https://github.com/stephlocke/lazyCDN/raw/master/DinoSequential.gif?raw=true" alt="" style="max-width:100%;"></p>
 </section><section id="visualizacion-de-datos" class="slide level2 left" data-background="http://www.wordstream.com/images/data-visualization-tools-concept.png">
 <h2>Visualización de datos</h2>
 </section><section id="visualizacion-de-datos-1" class="slide level2">
 <h2>Visualización de datos</h2>
 <p>Se refiere a la representación gráfica de los datos <strong>codificando la información</strong> como: posición, tamaño, formas, colores</p>
-<p><img src="img/data-viz.jpg" /></p>
+<p><img src="img/data-viz.jpg" width="60%"></p>
 </section><section class="slide level2">
 
-<p><img src="index_files/figure-revealjs/unnamed-chunk-20-1.svg" width="768" /></p>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-24-1.svg" width="768" /></p>
 </section><section class="slide level2">
 
-<p><img src="index_files/figure-revealjs/unnamed-chunk-21-1.svg" width="768" /></p>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-25-1.svg" width="768" /></p>
 </section><section class="slide level2">
 
-<p><img src="index_files/figure-revealjs/unnamed-chunk-22-1.svg" width="768" /></p>
-</section><section id="visualizacion-de-datos-2" class="slide level2">
-<h2>Visualización de datos</h2>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-26-1.svg" width="768" /></p>
+</section><section class="slide level2">
+
 <p>Existen muchos tipos de gráficos, y su uso dependerá:</p>
 <ul>
 <li>Tipo de variable</li>
 <li>Información que quiero extraer</li>
 </ul>
 <p><span class="fragment">No todos los gráficos tiene ek mismo <strong>objetivo</strong>. Ni tampoco comparten siempre la dificultad para ser <strong>interpretados</strong></span></p>
-</section><section id="visualizando-variables-categoricas" class="slide level2">
-<h2>Visualizando Variables Categóricas</h2>
+</section><section id="variables-categoricas" class="slide level2">
+<h2>Variables Categóricas</h2>
 <p>La forma más usual de visualizar una variable categórica es a través de gráfico de <strong>barras</strong> o <strong>columnas</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">legos2 &lt;-<span class="st"> </span><span class="kw">filter</span>(legos, Theme2 <span class="op">!=</span><span class="st"> &quot;Other&quot;</span>)
 <span class="kw">ggplot</span>(legos2) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(Theme, <span class="dt">fill =</span> Theme))</code></pre></div>
-<p><img src="index_files/figure-revealjs/unnamed-chunk-23-1.svg" width="576" /></p>
-</section><section id="visualizando-variables-categoricas-1" class="slide level2">
-<h2>Visualizando Variables Categóricas</h2>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-27-1.svg" width="576" /></p>
+</section><section class="slide level2">
+
 <p>También un muy usado es el <strong>pie chart</strong></p>
-<p><img src="index_files/figure-revealjs/unnamed-chunk-24-1.svg" width="768" /></p>
-</section><section id="visualizando-variables-categoricas-2" class="slide level2">
-<h2>Visualizando Variables Categóricas</h2>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-28-1.svg" width="768" /></p>
+</section><section class="slide level2">
+
 <p>También un muy (<strong>ab</strong>)usado es el <strong>pie chart</strong></p>
-<p><img src="index_files/figure-revealjs/unnamed-chunk-25-1.svg" width="768" /></p>
-</section><section id="visualizando-variables-categoricas-3" class="slide level2">
-<h2>Visualizando Variables Categóricas</h2>
-<p><img src="img/omgpie.gif" alt="viz" /></p>
-</section><section id="visualizando-variables-categoricas-4" class="slide level2">
-<h2>Visualizando Variables Categóricas</h2>
-<p>Treemap</p>
-</section><section id="visualizando-variables-numericas" class="slide level2">
-<h2>Visualizando Variables Numéricas</h2>
-<p>histograma link</p>
-<p>boxplot violin, swarm, hist,</p>
-</section><section id="visualizando-variables-categoricas-x-2" class="slide level2">
-<h2>Visualizando Variables Categóricas x 2</h2>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-29-1.svg" width="768" /></p>
+</section><section class="slide level2">
+
+<p><img src="img/omgpie.gif" width="80%"></p>
+</section><section class="slide level2">
+
+<p>También existen otras alternativas como el <strong>treemap</strong> ¿?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(treemapify) <span class="co"># install.packages(&quot;treemapify&quot;)</span>
+<span class="kw">ggplot</span>(<span class="kw">count</span>(legos2, Theme)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_treemap</span>(<span class="kw">aes</span>(<span class="dt">area =</span> n, <span class="dt">fill =</span> n)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_treemap_text</span>(<span class="kw">aes</span>(<span class="dt">area =</span> n, <span class="dt">label =</span> Theme), <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>)</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-30-1.svg" width="576" /></p>
+</section><section id="variables-numericas" class="slide level2">
+<h2>Variables Numéricas</h2>
+<p>La forma más usual de visualizar la distribución es usando el <strong>histograma</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos2) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(Year))</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-31-1.svg" width="576" /></p>
+</section><section class="slide level2">
+
+<p>Se puede complejizar, como todo</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos2) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(Year, <span class="dt">fill =</span> Theme), <span class="dt">binwidth =</span> <span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_viridis</span>(<span class="dt">discrete =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-32-1.svg" width="576" /></p>
+</section><section class="slide level2">
+
+<p>Revisemos <a href="http://tinlizzie.org/histograms/" class="uri">http://tinlizzie.org/histograms/</a></p>
+<p><img src="img/hist.png" width = "60%"></p>
+</section><section class="slide level2">
+
+<p>Según la forma de la distribución, existen categorías:</p>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-33-1.svg" width="768" /></p>
+</section><section class="slide level2">
+
+<p>Existen otras alternativas:</p>
+</section><section id="variables-categoricas-x-2" class="slide level2">
+<h2>Variables Categóricas x 2</h2>
 <p>heatmap treemap nested</p>
-</section><section id="visualizando-variables-numericas-x-2" class="slide level2">
-<h2>Visualizando Variables Numéricas x 2</h2>
+</section><section id="variables-numericas-x-2" class="slide level2">
+<h2>Variables Numéricas x 2</h2>
 <p>scatter</p>
-</section><section id="visualizando-numericas-y-categoricas" class="slide level2">
-<h2>Visualizando Numéricas y Categóricas</h2>
+</section><section id="numericas-y-categoricas" class="slide level2">
+<h2>Numéricas y Categóricas</h2>
 <p>scatter facet boxplot violin, swarm, hist,</p>
 </section><section id="menciones-honrosas-menos-estandar" class="slide level2">
 <h2>Menciones Honrosas (menos estándar)</h2>
@@ -921,21 +1005,21 @@ d2 &lt;-<span class="st"> </span>datasaurus_dozen <span class="op">%&gt;%</span>
 
 data &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;https://earthquake.usgs.gov/fdsnws/event/1/query?starttime=2017-09-01&amp;endtime=2017-09-31&amp;format=text&quot;</span>, <span class="dt">delim =</span> <span class="st">&quot;|&quot;</span>)
 <span class="kw">glimpse</span>(data)</code></pre></div>
-<pre><code>## Observations: 8,452
+<pre><code>## Observations: 8,614
 ## Variables: 13
-## $ `#EventID`        &lt;chr&gt; &quot;ak16917874&quot;, &quot;ak16917871&quot;, &quot;ci38011816&quot;, &quot;a...
-## $ Time              &lt;dttm&gt; 2017-09-27 05:56:22, 2017-09-27 05:54:50, 2...
-## $ Latitude          &lt;dbl&gt; 62.14220, 67.45020, 34.00300, 62.19500, 38.2...
-## $ Longitude         &lt;dbl&gt; -150.2671, -148.3677, -116.2785, -150.2995, ...
-## $ `Depth/km`        &lt;dbl&gt; 17.50, 0.00, 8.11, 2.50, 16.40, 4.93, 10.07,...
-## $ Author            &lt;chr&gt; &quot;ak&quot;, &quot;ak&quot;, &quot;ci&quot;, &quot;ak&quot;, &quot;nn&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;n...
-## $ Catalog           &lt;chr&gt; &quot;ak&quot;, &quot;ak&quot;, &quot;ci&quot;, &quot;ak&quot;, &quot;nn&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;n...
-## $ Contributor       &lt;chr&gt; &quot;ak&quot;, &quot;ak&quot;, &quot;ci&quot;, &quot;ak&quot;, &quot;nn&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;n...
-## $ ContributorID     &lt;chr&gt; &quot;ak16917874&quot;, &quot;ak16917871&quot;, &quot;ci38011816&quot;, &quot;a...
+## $ `#EventID`        &lt;chr&gt; &quot;ci38012288&quot;, &quot;ak16923724&quot;, &quot;nn00607250&quot;, &quot;a...
+## $ Time              &lt;dttm&gt; 2017-09-27 18:14:05, 2017-09-27 18:10:50, 2...
+## $ Latitude          &lt;dbl&gt; 33.42183, 57.42000, 37.20640, 59.83420, 33.4...
+## $ Longitude         &lt;dbl&gt; -116.9420, -155.6182, -117.8391, -136.8276, ...
+## $ `Depth/km`        &lt;dbl&gt; 13.73, 79.10, 0.10, 0.00, 6.40, 4.89, 1.00, ...
+## $ Author            &lt;chr&gt; &quot;ci&quot;, &quot;ak&quot;, &quot;nn&quot;, &quot;ak&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;nn&quot;, &quot;a...
+## $ Catalog           &lt;chr&gt; &quot;ci&quot;, &quot;ak&quot;, &quot;nn&quot;, &quot;ak&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;nn&quot;, &quot;a...
+## $ Contributor       &lt;chr&gt; &quot;ci&quot;, &quot;ak&quot;, &quot;nn&quot;, &quot;ak&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;nn&quot;, &quot;a...
+## $ ContributorID     &lt;chr&gt; &quot;ci38012288&quot;, &quot;ak16923724&quot;, &quot;nn00607250&quot;, &quot;a...
 ## $ MagType           &lt;chr&gt; &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;m...
-## $ Magnitude         &lt;dbl&gt; 1.30, 2.30, 0.80, 2.40, 1.30, 2.25, 1.19, 1....
-## $ MagAuthor         &lt;chr&gt; &quot;ak&quot;, &quot;ak&quot;, &quot;ci&quot;, &quot;ak&quot;, &quot;nn&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;n...
-## $ EventLocationName &lt;chr&gt; &quot;21km W of Y, Alaska&quot;, &quot;81km ENE of Coldfoot...</code></pre>
+## $ Magnitude         &lt;dbl&gt; 0.66, 1.70, 0.90, 1.90, 0.89, 0.73, 1.30, 1....
+## $ MagAuthor         &lt;chr&gt; &quot;ci&quot;, &quot;ak&quot;, &quot;nn&quot;, &quot;ak&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;nn&quot;, &quot;a...
+## $ EventLocationName &lt;chr&gt; &quot;8km WSW of Aguanga, CA&quot;, &quot;99km W of Larsen ...</code></pre>
 </section></section>
 <section><section id="metainfo-creditos" class="titleslide slide level1 center white" data-background="#FF5722"><h1>Metainfo &amp; Créditos</h1></section></section>
     </div>

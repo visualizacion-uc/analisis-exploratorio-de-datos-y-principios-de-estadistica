@@ -101,7 +101,7 @@ No existe definición formal con reglas a seguir. Es un __estado mental__
 
 <span class="fragment">__Generar conocimiento__</span>
 
-## AED
+----
 
 Generar conocimiento no solo implica extraer la información que tratan de medir
 los datos
@@ -125,17 +125,20 @@ __categórica__ o __continua__</span>
 
 ## Dataset Legos { .left .white    data-background="http://media-cdn.timesfreepress.com/img/photos/2016/07/25/1469464845_0727MfeatLibrary1-C_t1070_h5be62d5b4b340aded4d6baf5bd671ee4fd6571f4.jpg" }
 
-## Leyendo datos
+----
 
 ```{r}
+# cargar paquete con funciones que nos ayudarán
 library(tidyverse)
 
+# leo datos desde una url
 legos <- read_csv("https://raw.githubusercontent.com/seankross/lego/master/data-tidy/legosets.csv")
+
 # primer paso! paso #1
 glimpse(legos)
 ```
 
-## Explorando Variables Discretas
+----
 
 ¿Cuántos temas hay?
 
@@ -143,7 +146,7 @@ glimpse(legos)
 legos %>% count(Theme, sort = TRUE)
 ```
 
-## Explorando Variables Discretas
+----
 
 ¿Cuántos temas hay?
 
@@ -152,17 +155,31 @@ ggplot(legos) +
   geom_bar(aes(Theme))
 ```
 
-## Explorando Variables Discretas
+----
+
+¿Cuántos temas hay?
+ 
+<img src="https://i.giphy.com/media/JSueytO5O29yM/giphy.webp" onerror="this.onerror=null;this.src='https://i.giphy.com/JSueytO5O29yM.gif';" alt="" style="width:300px">
+
+<span class="fragment">Muy __seguro__ nos encontraremos con cosas
+de este estilo donde tenemos que modificar nuestros
+resultados</span>
+
+----
 
 ¿Cuántos temas hay?
 
 ```{r}
 library(forcats)
+
+# creamos variable derivada que agrupe grupe las otras
+# categorías que no corresponden a los 7 más grandes 
+# fct_lump
 legos <- mutate(legos, Theme2 = fct_lump(Theme, n = 7))
 ggplot(legos) + geom_bar(aes(Theme2))
 ```
 
-## Explorando Variables Discretas
+----
 
 ¿Cuáles son los tipos de envoltorio?
 
@@ -170,7 +187,7 @@ ggplot(legos) + geom_bar(aes(Theme2))
 legos %>% count(Packaging, sort = TRUE)
 ```
 
-## Explorando Variables Discretas
+----
 
 ¿Cuáles son los tipos de envoltorio?
 
@@ -179,13 +196,13 @@ ggplot(legos) +
   geom_bar(aes(Packaging))
 ```
 
-## Explorando Variables Discretas
+----
 
 ¿Y esas etiquetas? 
 
 <img src="https://i.giphy.com/media/tu54GM19sqJOw/giphy.webp" onerror="this.onerror=null;this.src='https://i.giphy.com/tu54GM19sqJOw.gif';" alt="" style="width: 500px;">
 
-## Explorando Variables Discretas
+----
 
 ¿Y esas etiquetas? 
 
@@ -195,7 +212,7 @@ ggplot(legos) +
   coord_flip() # rotar :D
 ```
 
-## Explorando Variables Discretas
+----
 
 ¿Y esas etiquetas? 
 
@@ -205,7 +222,7 @@ ggplot(legos) +
   geom_bar(aes(Packaging)) + coord_flip() # rotar :D
 ```
 
-## Explorando Variables Continuas
+----
 
 ¿Desde cuándo se _tenemos registros_ de sets de legos?*
 
@@ -214,7 +231,7 @@ ggplot(legos) +
   geom_bar(aes(Year))
 ```
 
-## Explorando Variables Continuas
+----
 
 ¿Cuántas piezas traen los sets?
 
@@ -223,7 +240,7 @@ ggplot(legos) +
   geom_histogram(aes(Pieces))
 ```
 
-## Explorando Variables Continuas
+----
 
 ¿Cuántas piezas traen los sets?
 
@@ -233,7 +250,7 @@ ggplot(legos) + geom_histogram(aes(Pieces2))
 ```
 
 
-## Explorando Variables Continuas
+----
 
 ¿Cuántas minifuguras traen los sets?
 
@@ -242,7 +259,7 @@ ggplot(legos) +
   geom_histogram(aes(Minifigures))
 ```
 
-## Valores comunes, valores raros
+----
 
 ¿Cuántos sets traen más de 25 figuras? ¿Cuáles son?
 
@@ -270,12 +287,11 @@ Conjunto de procedimientos para __resumir__ datos
 ## Motivación
 
 >- Te mandan un _inocente_ archivo
->- Mientras te piden que encuentres información relevante (para ayer)
 >- Te pieden que describas el contenido 
 >- Y obtengas información relevante
 >- Claramente nunca habías visto este tipo de información
 
-## Motivación
+----
 
 Lo abres y 
 
@@ -322,26 +338,30 @@ Son valores que nos describen la dispersión de los datos. Es decir, __que tan c
 
 ## DataSaurus { .white .right data-background="img/datasaurus.jpg"}
 
-## DataSaurus
+----
 
 ```{r}
-# install.packages("datasauRus")
-library(datasauRus)
+library(datasauRus) # install.packages("datasauRus")
 
+# exploramos
 datasaurus_dozen
 ```
 
-## DataSaurus
+----
 
 ```{r}
+# contamos categorías de la variable `dataset`
 datasaurus_dozen %>% 
   count(dataset)
 
+# creamos dos sub data frames
 d1 <- datasaurus_dozen %>% filter(dataset == "away")
 d2 <- datasaurus_dozen %>% filter(dataset == "dino")
 ```
 
-## DataSaurus
+----
+
+Exploramos la primera
 
 ```{r}
 glimpse(d1)
@@ -356,7 +376,9 @@ d1 %>%
   )
 ```
 
-## DataSaurus
+----
+
+Luego la segunda
 
 ```{r}
 glimpse(d2)
@@ -371,6 +393,53 @@ d2 %>%
   )
 ```
 
+---- 
+
+Resultados muy similares ¿Asumimos que los datos distribuyen igual?
+
+```{r, eval=FALSE}
+ggplot(d1) + geom_point(aes(x, y))
+ggplot(d2) + geom_point(aes(x, y))
+```
+```{r, echo=FALSE}
+grid.arrange(
+  ggplot(d1) + geom_point(aes(x, y), size = 1, color = "gray50") + theme(aspect.ratio=1),
+  ggplot(d2) + geom_point(aes(x, y), size = 1, color = "gray50") + theme(aspect.ratio=1),
+  nrow = 1
+)
+```
+
+----
+```{r}
+datasaurus_dozen %>% 
+  group_by(dataset) %>% 
+  summarise(
+    x_mean = mean(x),
+    y_mean = mean(y),
+    x_sd = sd(x),
+    y_sd = sd(y),
+    xy_corr = cor(x, y)
+  )
+```
+
+----
+
+```{r, fig.height=5}
+ggplot(filter(datasaurus_dozen, dataset != "circle")) +
+  geom_point(aes(x, y, color = dataset), size = 0.6) + 
+  facet_wrap(~ dataset) + # hacer mini multiples segun la variable dataset
+  theme(legend.position = "none")
+```
+
+----
+
+Si te dicen que en una película a la mitad se pone entretenida, existen
+__muchas__ películas que que cumplen dicha característica y no necesariamente
+habla de la que tu conoces que a la mitad se vuelve entretenida 
+
+
+<img src="https://github.com/stephlocke/lazyCDN/raw/master/DinoSequential.gif?raw=true" alt="" style="max-width:100%;">
+
 
 ## Visualización de datos { .left data-background="http://www.wordstream.com/images/data-visualization-tools-concept.png"}
 
@@ -378,7 +447,7 @@ d2 %>%
 
 Se refiere a la representación gráfica de los datos __codificando la información__ como: posición, tamaño, formas, colores
 
-![](img/data-viz.jpg)
+<img src="img/data-viz.jpg" width="60%">
 
 ----
 
@@ -389,7 +458,6 @@ ggplot(legos) +
   scale_y_sqrt(name = "Precio USD", labels = dollar, limits = c(0, 300)) +
   scale_x_sqrt(name = "Piezas", labels = comma, limits = c(0, 2000)) 
 ```
-
 
 ----
 
@@ -449,7 +517,7 @@ dfnet2 <- ggnet %>%
 
 ggplot(ggnet) + 
   geom_edges(aes(x, y, size = width, color = factor(comm),
-           xend = xend, yend = yend), color = "gray", size = 1, alpha = 0.3) +
+           xend = xend, yend = yend), color = "gray", size = 1) +
   geom_point(aes(x, y, size = size, color = factor(comm))) +
   geom_text_repel(aes(x, y, label = vertex.names, size = size),
                   data = dfnet2, color = "#666666",
@@ -459,9 +527,7 @@ ggplot(ggnet) +
   labs(size = "Pagerank", color = "Comunidad")
 ```
 
-
-
-## Visualización de datos
+----
 
 Existen muchos tipos de gráficos, y su uso dependerá:
 
@@ -471,7 +537,7 @@ Existen muchos tipos de gráficos, y su uso dependerá:
 <span class="fragment">No todos los gráficos tiene ek mismo __objetivo__. Ni
 tampoco comparten siempre la dificultad para ser __interpretados__</span>
 
-## Visualizando Variables Categóricas
+## Variables Categóricas
 
 La forma más usual de visualizar una variable categórica es
 a través de gráfico de __barras__ o __columnas__
@@ -482,12 +548,11 @@ legos2 <- filter(legos, Theme2 != "Other")
 ggplot(legos2) + geom_bar(aes(Theme, fill = Theme))
 ```
 
-## Visualizando Variables Categóricas
+----
 
 También un muy usado es el __pie chart__
 
 ```{r, echo=FALSE, fig.width=8, fig.height=5}
-library(gridExtra)
 p1 <- ggplot(legos2) +
   geom_bar(aes(Theme, fill = Theme)) +
   scale_fill_viridis(discrete = TRUE, option = "B") +
@@ -503,7 +568,7 @@ p2 <- ggplot(legos2) +
 grid.arrange(p1, p2, nrow = 1)
 ```
 
-## Visualizando Variables Categóricas
+----
 
 También un muy (__ab__)usado es el __pie chart__
 
@@ -527,31 +592,95 @@ p2 <- ggplot(legos3) +
 grid.arrange(p1, p2, nrow = 1)
 ```
 
-## Visualizando Variables Categóricas
+----
 
-![viz](img/omgpie.gif)
+<img src="img/omgpie.gif" width="80%">
 
-## Visualizando Variables Categóricas
+----
 
-Treemap
+También existen otras alternativas como el __treemap__ ¿?
 
-## Visualizando Variables Numéricas
+```{r}
+library(treemapify) # install.packages("treemapify")
+ggplot(count(legos2, Theme)) +
+  geom_treemap(aes(area = n, fill = n)) +
+  geom_treemap_text(aes(area = n, label = Theme), color = "white")
+```
 
-histograma 
-link
 
-boxplot violin, swarm, hist,
+## Variables Numéricas
 
-## Visualizando Variables Categóricas x 2
+La forma más usual de visualizar la distribución es usando el __histograma__
+
+```{r}
+ggplot(legos2) +
+  geom_histogram(aes(Year))
+```
+
+----
+
+Se puede complejizar, como todo
+
+```{r}
+ggplot(legos2) +
+  geom_histogram(aes(Year, fill = Theme), binwidth = 1) +
+  scale_fill_viridis(discrete = TRUE)
+```
+
+----
+
+Revisemos http://tinlizzie.org/histograms/
+
+<img src="img/hist.png" width = "60%">
+
+----
+
+Según la forma de la distribución, existen categorías:
+
+```{r, echo=FALSE, fig.width=8, fig.height=5}
+ggplot(dfdist) +
+  geom_histogram(aes(value, fill = key)) +
+  facet_wrap(~key, scales = "free") +
+  scale_fill_viridis(discrete = TRUE, begin = .2, end = .8, option = "B") +
+  theme_null()
+```
+
+----
+
+Existen otras alternativas. En datos simétricos:
+
+```{r, echo=FALSE, fig.width=8, fig.height=5}
+gg_dists("Simétrica", main_color)
+```
+
+----
+
+Datos bimodales
+
+```{r, echo=FALSE, fig.width=8, fig.height=5}
+gg_dists("Bimodal")
+```
+
+----
+```{r, echo=FALSE, fig.width=8, fig.height=5}
+gg_dists("Uniforme")
+```
+
+----
+```{r, echo=FALSE, fig.width=8, fig.height=5}
+gg_dists("Asimétrica")
+```
+
+## Variables Categóricas x 2
 
 heatmap
 treemap nested
 
-## Visualizando Variables Numéricas x 2
+## Variables Numéricas x 2
 
 scatter
 
-## Visualizando Numéricas y Categóricas
+## Numéricas y Categóricas
 
 scatter
 facet boxplot violin, swarm, hist, 
