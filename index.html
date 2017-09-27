@@ -510,7 +510,7 @@ Joshua Kunst, Septiembre 2017
 <li>Estudiar Ejemplos <span class="fragment">, hacer ejemplos</span><span class="fragment">, <strong>equivocarnos</strong></span><span class="fragment">, <strong>corregirnos</strong></span><span class="fragment">, vivir ejemplos</span></li>
 </ul>
 </section></section>
-<section><section id="introduccion" class="titleslide slide level1"><h1>Introducción</h1></section><section id="introduccion-1" class="slide level2">
+<section><section id="introduccion" class="titleslide slide level1 center white" data-background="#F44336"><h1>Introducción</h1></section><section id="introduccion-1" class="slide level2">
 <h2>Introducción</h2>
 <p><img src="https://visualizacion-uc.github.io/procesamiento-y-analisis-de-datos/clases/img/tidy-data.png" height="350px" /></p>
 <p>Fuente: R for Data Science, Wickham &amp; Grolemund</p>
@@ -542,7 +542,7 @@ Joshua Kunst, Septiembre 2017
 <li class="fragment">Familiarizado con <code>ggplot2</code> y <code>dplyr</code></li>
 </ul>
 </section></section>
-<section><section id="analisis-exploratorio-de-datos" class="titleslide slide level1"><h1>Análisis Exploratorio de Datos</h1></section><section id="analisis-exploratorio-de-datos-1" class="slide level2">
+<section><section id="analisis-exploratorio-de-datos" class="titleslide slide level1 center white" data-background="#3F51B5"><h1>Análisis Exploratorio de Datos</h1></section><section id="analisis-exploratorio-de-datos-1" class="slide level2">
 <h2>Análisis Exploratorio de Datos</h2>
 <p>No existe definición formal con reglas a seguir. Es un <strong>estado mental</strong></p>
 <ul>
@@ -642,14 +642,14 @@ legos &lt;-<span class="st"> </span><span class="kw">mutate</span>(legos, <span 
 ## 14                   Tag     6</code></pre>
 </section><section id="explorando-variables-discretas-4" class="slide level2">
 <h2>Explorando Variables Discretas</h2>
-<p>¿Cuáles son los tipos de embalajes?</p>
+<p>¿Cuáles son los tipos de envoltorio?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(Packaging))</code></pre></div>
 <p><img src="index_files/figure-revealjs/unnamed-chunk-8-1.svg" width="576" /></p>
 </section><section id="explorando-variables-discretas-5" class="slide level2">
 <h2>Explorando Variables Discretas</h2>
 <p>¿Y esas etiquetas?</p>
-<p><img src="https://i.giphy.com/media/tu54GM19sqJOw/giphy.webp" onerror="this.onerror=null;this.src='https://i.giphy.com/tu54GM19sqJOw.gif';" alt="", style="width: 500px;"></p>
+<p><img src="https://i.giphy.com/media/tu54GM19sqJOw/giphy.webp" onerror="this.onerror=null;this.src='https://i.giphy.com/tu54GM19sqJOw.gif';" alt="" style="width: 500px;"></p>
 </section><section id="explorando-variables-discretas-6" class="slide level2">
 <h2>Explorando Variables Discretas</h2>
 <p>¿Y esas etiquetas?</p>
@@ -678,13 +678,19 @@ legos &lt;-<span class="st"> </span><span class="kw">mutate</span>(legos, <span 
 <p><img src="index_files/figure-revealjs/unnamed-chunk-12-1.svg" width="576" /></p>
 </section><section id="explorando-variables-continuas-2" class="slide level2">
 <h2>Explorando Variables Continuas</h2>
+<p>¿Cuántas piezas traen los sets?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">legos &lt;-<span class="st"> </span><span class="kw">mutate</span>(legos, <span class="dt">Pieces2 =</span> <span class="kw">ifelse</span>(Pieces <span class="op">&gt;</span><span class="st"> </span><span class="dv">1000</span>, <span class="dv">1000</span>, Pieces))
+<span class="kw">ggplot</span>(legos) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(Pieces2))</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-13-1.svg" width="576" /></p>
+</section><section id="explorando-variables-continuas-3" class="slide level2">
+<h2>Explorando Variables Continuas</h2>
 <p>¿Cuántas minifuguras traen los sets?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(Minifigures))</code></pre></div>
-<p><img src="index_files/figure-revealjs/unnamed-chunk-13-1.svg" width="576" /></p>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-14-1.svg" width="576" /></p>
 </section><section id="valores-comunes-valores-raros" class="slide level2">
 <h2>Valores comunes, valores raros</h2>
-<p>En el caso anterior, ¿Cuál es el número más comun de figuras? ¿Cuántos sets traen más de 25 figuras? ¿Cuáles son?</p>
+<p>¿Cuántos sets traen más de 25 figuras? ¿Cuáles son?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">legos <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(Minifigures <span class="op">&gt;</span><span class="st"> </span><span class="dv">25</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(Name, Year, Theme, Minifigures)</code></pre></div>
@@ -696,15 +702,31 @@ legos &lt;-<span class="st"> </span><span class="kw">mutate</span>(legos, <span 
 ## 3             Community Workers  2006 Education          31
 ## 4             Community Workers  2005 Education          31
 ## 5             Community Workers  1996     Dacta          30</code></pre>
+</section><section id="al-infinito-y-mas-alla" class="slide level2">
+<h2>Al infinito y más allá</h2>
+<p><img src="https://i.giphy.com/media/yns3VgsP30GDm/giphy.webp" onerror="this.onerror=null;this.src='https://i.giphy.com/yns3VgsP30GDm.gif';" alt="" style="width: 500px;"></p>
 </section></section>
-<section><section id="estadistica-descriptiva" class="titleslide slide level1"><h1>Estadística Descriptiva</h1></section><section id="estadistica-descriptiva-1" class="slide level2">
+<section><section id="estadistica-descriptiva" class="titleslide slide level1 center white" data-background="#4CAF50"><h1>Estadística Descriptiva</h1></section><section id="estadistica-descriptiva-1" class="slide level2">
 <h2>Estadística Descriptiva</h2>
 <p>Conjunto de procedimientos para <strong>resumir</strong> datos.</p>
 <ul>
-<li class="fragment">Medidas de tendencia central y dispersión</li>
-<li class="fragment">Visualización de datos</li>
+<li class="fragment">Medidas de tendencia central y dispersión<span class="fragment">. No solo basta con ver que valores puede tomar una variable<span></li>
+<li class="fragment">Visualización de datos<span class="fragment">. Distintos gráficos nos cuentan diferente información acerca de la variable(s)<span></li>
 </ul>
 <p><span class="fragment"><strong>Sintetizar información</strong><span></p>
+</section><section id="motivacion" class="slide level2">
+<h2>Motivación</h2>
+<ul>
+<li>Te mandan un <em>inocente</em> archivo.</li>
+<li>Mientras te piden que encuentres información relevante (para ayer)</li>
+<li>Te pieden que describas el contenido</li>
+<li>Y obtengas información relevante</li>
+<li>Claramente nunca habías visto este tipo de información</li>
+</ul>
+</section><section id="motivacion-1" class="slide level2">
+<h2>Motivación</h2>
+<p>Lo abres y</p>
+<p><span class="fragment"> <img src="img/excel-data.png" /> <span></p>
 </section><section id="glosario-2" class="slide level2">
 <h2>Glosario</h2>
 <p>Tipos de Variables</p>
@@ -720,29 +742,161 @@ legos &lt;-<span class="st"> </span><span class="kw">mutate</span>(legos, <span 
 <li>Continua. Peso; 3.54, 5.45</li>
 </ul></li>
 </ul>
-</section><section id="medidas-de-tendencia" class="slide level2">
-<h2>Medidas de Tendencia</h2>
-<p>Son indicadores (generalmente un número) obtenidos de los datos que <strong>resumen</strong> información y nos hablan de alguna característica de la <strong>distribución</strong> de la variable.</p>
+</section><section id="medidas-de-tendencia-y-dispersion" class="slide level2">
+<h2>Medidas de Tendencia y Dispersión</h2>
+<p>Son indicadores (generalmente un número) obtenidos de los datos que <strong>resumen</strong> información y nos hablan de alguna característica de la <strong>distribución</strong> de la variable</p>
+<p><span class="fragment">Nos ayudan a tener una idea más fina en <strong>donde se concentran</strong> las variables y que <strong>tan concentrados</strong> están los valores</span></p>
 </section><section id="medidas-de-tendencia-central" class="slide level2">
 <h2>Medidas de Tendencia Central</h2>
 <p>Nos señalan el valor en <em>torno al cual se concentran los datos</em></p>
 <ul>
-<li>Media o Promedio: La suma de los datos dividido por la cantidad de los mismos</li>
+<li><strong>Media</strong> o <strong>Promedio</strong>: La suma de los datos dividido por la cantidad de los mismos</li>
 <li>Mediana: Es el valor que está al medio cuando los datos se ordenan</li>
 <li>Moda: Es el valor que más se repite. Este se usa cuando la variable es <em>discreta</em></li>
 </ul>
-</section><section id="visualizacion-de-datos" class="slide level2">
+</section><section id="medidas-de-dispersion" class="slide level2">
+<h2>Medidas de Dispersión</h2>
+<p>Son valores que nos describen la dispersión de los datos. Es decir, <strong>que tan concentrados</strong> están:</p>
+<ul>
+<li><strong>Desviación estándar</strong>: Mide el grado de dispersión en torno a la media</li>
+<li>Rango: Es el tamaño del intervalo que cubren los datos, el mayor valor menos el mínimo</li>
+</ul>
+</section><section id="ejemplo-equipos" class="slide level2">
+<h2>Ejemplo equipos</h2>
+</section><section id="datasaurus" class="slide level2 white right" data-background="img/datasaurus.jpg">
+<h2>DataSaurus</h2>
+</section><section id="datasaurus-1" class="slide level2">
+<h2>DataSaurus</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&quot;datasauRus&quot;)</span>
+<span class="kw">library</span>(datasauRus)
+
+datasaurus_dozen</code></pre></div>
+<pre><code>## # A tibble: 1,846 x 3
+##    dataset       x       y
+##      &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+##  1    dino 55.3846 97.1795
+##  2    dino 51.5385 96.0256
+##  3    dino 46.1538 94.4872
+##  4    dino 42.8205 91.4103
+##  5    dino 40.7692 88.3333
+##  6    dino 38.7179 84.8718
+##  7    dino 35.6410 79.8718
+##  8    dino 33.0769 77.5641
+##  9    dino 28.9744 74.4872
+## 10    dino 26.1538 71.4103
+## # ... with 1,836 more rows</code></pre>
+</section><section id="datasaurus-2" class="slide level2">
+<h2>DataSaurus</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">datasaurus_dozen <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(dataset)</code></pre></div>
+<pre><code>## # A tibble: 13 x 2
+##       dataset     n
+##         &lt;chr&gt; &lt;int&gt;
+##  1       away   142
+##  2   bullseye   142
+##  3     circle   142
+##  4       dino   142
+##  5       dots   142
+##  6    h_lines   142
+##  7 high_lines   142
+##  8 slant_down   142
+##  9   slant_up   142
+## 10       star   142
+## 11    v_lines   142
+## 12 wide_lines   142
+## 13    x_shape   142</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d1 &lt;-<span class="st"> </span>datasaurus_dozen <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(dataset <span class="op">==</span><span class="st"> &quot;away&quot;</span>)
+d2 &lt;-<span class="st"> </span>datasaurus_dozen <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(dataset <span class="op">==</span><span class="st"> &quot;dino&quot;</span>)</code></pre></div>
+</section><section id="datasaurus-3" class="slide level2">
+<h2>DataSaurus</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glimpse</span>(d1)</code></pre></div>
+<pre><code>## Observations: 142
+## Variables: 3
+## $ dataset &lt;chr&gt; &quot;away&quot;, &quot;away&quot;, &quot;away&quot;, &quot;away&quot;, &quot;away&quot;, &quot;away&quot;, &quot;away&quot;...
+## $ x       &lt;dbl&gt; 32.33111, 53.42146, 63.92020, 70.28951, 34.11883, 67.6...
+## $ y       &lt;dbl&gt; 61.411101, 26.186880, 30.832194, 82.533649, 45.734551,...</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d1 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(
+    <span class="dt">x_mean =</span> <span class="kw">mean</span>(x),
+    <span class="dt">y_mean =</span> <span class="kw">mean</span>(y),
+    <span class="dt">x_sd =</span> <span class="kw">sd</span>(x),
+    <span class="dt">y_sd =</span> <span class="kw">sd</span>(y),
+    <span class="dt">xy_corr =</span> <span class="kw">cor</span>(x, y)
+  )</code></pre></div>
+<pre><code>## # A tibble: 1 x 5
+##    x_mean   y_mean     x_sd     y_sd     xy_corr
+##     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+## 1 54.2661 47.83472 16.76982 26.93974 -0.06412835</code></pre>
+</section><section id="datasaurus-4" class="slide level2">
+<h2>DataSaurus</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glimpse</span>(d2)</code></pre></div>
+<pre><code>## Observations: 142
+## Variables: 3
+## $ dataset &lt;chr&gt; &quot;dino&quot;, &quot;dino&quot;, &quot;dino&quot;, &quot;dino&quot;, &quot;dino&quot;, &quot;dino&quot;, &quot;dino&quot;...
+## $ x       &lt;dbl&gt; 55.3846, 51.5385, 46.1538, 42.8205, 40.7692, 38.7179, ...
+## $ y       &lt;dbl&gt; 97.1795, 96.0256, 94.4872, 91.4103, 88.3333, 84.8718, ...</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(
+    <span class="dt">x_mean =</span> <span class="kw">mean</span>(x),
+    <span class="dt">y_mean =</span> <span class="kw">mean</span>(y),
+    <span class="dt">x_sd =</span> <span class="kw">sd</span>(x),
+    <span class="dt">y_sd =</span> <span class="kw">sd</span>(y),
+    <span class="dt">xy_corr =</span> <span class="kw">cor</span>(x, y)
+  )</code></pre></div>
+<pre><code>## # A tibble: 1 x 5
+##     x_mean   y_mean     x_sd    y_sd     xy_corr
+##      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;
+## 1 54.26327 47.83225 16.76514 26.9354 -0.06447185</code></pre>
+</section><section id="visualizacion-de-datos" class="slide level2 left" data-background="http://www.wordstream.com/images/data-visualization-tools-concept.png">
 <h2>Visualización de datos</h2>
 </section><section id="visualizacion-de-datos-1" class="slide level2">
 <h2>Visualización de datos</h2>
-<p>Se refiere a la representación gráfica de los datos codificando la información o atributos como: posición, tamaño, formas, colores</p>
+<p>Se refiere a la representación gráfica de los datos <strong>codificando la información</strong> como: posición, tamaño, formas, colores</p>
 <p><img src="img/data-viz.jpg" /></p>
+</section><section class="slide level2">
+
+<p><img src="index_files/figure-revealjs/unnamed-chunk-20-1.svg" width="768" /></p>
+</section><section class="slide level2">
+
+<p><img src="index_files/figure-revealjs/unnamed-chunk-21-1.svg" width="768" /></p>
+</section><section class="slide level2">
+
+<p><img src="index_files/figure-revealjs/unnamed-chunk-22-1.svg" width="768" /></p>
+</section><section id="visualizacion-de-datos-2" class="slide level2">
+<h2>Visualización de datos</h2>
+<p>Existen muchos tipos de gráficos, y su uso dependerá:</p>
+<ul>
+<li>Tipo de variable</li>
+<li>Información que quiero extraer</li>
+</ul>
+<p><span class="fragment">No todos los gráficos tiene ek mismo <strong>objetivo</strong>. Ni tampoco comparten siempre la dificultad para ser <strong>interpretados</strong>.</span></p>
+</section><section id="visualizando-variables-categoricas" class="slide level2">
+<h2>Visualizando Variables Categóricas</h2>
+<p>pie vs bar</p>
+<p>treemap</p>
+</section><section id="visualizando-variables-numericas" class="slide level2">
+<h2>Visualizando Variables Numéricas</h2>
+<p>histograma link</p>
+<p>boxplot violin, swarm, hist,</p>
+</section><section id="visualizando-variables-categoricas-x-2" class="slide level2">
+<h2>Visualizando Variables Categóricas x 2</h2>
+<p>heatmap treemap nested</p>
+</section><section id="visualizando-variables-numericas-x-2" class="slide level2">
+<h2>Visualizando Variables Numéricas x 2</h2>
+<p>scatter</p>
+</section><section id="visualizando-numericas-y-categoricas" class="slide level2">
+<h2>Visualizando Numéricas y Categóricas</h2>
+<p>scatter facet boxplot violin, swarm, hist,</p>
+</section><section id="menciones-honrosas-menos-estandar" class="slide level2">
+<h2>Menciones Honrosas (menos estándar)</h2>
 </section><section id="lollipop" class="slide level2">
 <h2>Lollipop</h2>
 <p><img src="http://uc-r.github.io/public/images/visual/lollipop/lollipop-icon.png" /></p>
 <p>Fuente: <a href="http://uc-r.github.io/lollipop" class="uri">http://uc-r.github.io/lollipop</a></p>
+</section><section id="joyploy" class="slide level2">
+<h2>Joyploy</h2>
 </section></section>
-<section><section id="ejercicio-i" class="titleslide slide level1"><h1>Ejercicio I</h1></section><section id="datos" class="slide level2">
+<section><section id="ejercicio-i" class="titleslide slide level1 center white" data-background="#03A9F4"><h1>Ejercicio I</h1></section><section id="datos" class="slide level2">
 <h2>Datos</h2>
 <p>seismic monitor data api <a href="https://earthquake.usgs.gov/fdsnws/event/1/" class="uri">https://earthquake.usgs.gov/fdsnws/event/1/</a></p>
 </section><section id="datos-1" class="slide level2">
@@ -751,23 +905,23 @@ legos &lt;-<span class="st"> </span><span class="kw">mutate</span>(legos, <span 
 
 data &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;https://earthquake.usgs.gov/fdsnws/event/1/query?starttime=2017-09-01&amp;endtime=2017-09-31&amp;format=text&quot;</span>, <span class="dt">delim =</span> <span class="st">&quot;|&quot;</span>)
 <span class="kw">glimpse</span>(data)</code></pre></div>
-<pre><code>## Observations: 8,130
+<pre><code>## Observations: 8,416
 ## Variables: 13
-## $ `#EventID`        &lt;chr&gt; &quot;ci38011048&quot;, &quot;ak16909574&quot;, &quot;nc72899201&quot;, &quot;n...
-## $ Time              &lt;dttm&gt; 2017-09-26 13:36:42, 2017-09-26 13:23:17, 2...
-## $ Latitude          &lt;dbl&gt; 33.97550, 63.48350, 36.03117, 36.15167, 33.2...
-## $ Longitude         &lt;dbl&gt; -116.2753, -147.2151, -120.5957, -120.2213, ...
-## $ `Depth/km`        &lt;dbl&gt; 2.98, 25.10, 0.44, 11.60, 1.98, 6.72, 112.90...
-## $ Author            &lt;chr&gt; &quot;ci&quot;, &quot;ak&quot;, &quot;nc&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ak&quot;, &quot;c...
-## $ Catalog           &lt;chr&gt; &quot;ci&quot;, &quot;ak&quot;, &quot;nc&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ak&quot;, &quot;c...
-## $ Contributor       &lt;chr&gt; &quot;ci&quot;, &quot;ak&quot;, &quot;nc&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ak&quot;, &quot;c...
-## $ ContributorID     &lt;chr&gt; &quot;ci38011048&quot;, &quot;ak16909574&quot;, &quot;nc72899201&quot;, &quot;n...
-## $ MagType           &lt;chr&gt; &quot;ml&quot;, &quot;ml&quot;, &quot;md&quot;, &quot;md&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;m...
-## $ Magnitude         &lt;dbl&gt; 1.64, 2.40, 0.77, 2.28, 1.31, 0.52, 1.30, 0....
-## $ MagAuthor         &lt;chr&gt; &quot;ci&quot;, &quot;ak&quot;, &quot;nc&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;ak&quot;, &quot;c...
-## $ EventLocationName &lt;chr&gt; &quot;18km S of Joshua Tree, CA&quot;, &quot;87km E of Cant...</code></pre>
+## $ `#EventID`        &lt;chr&gt; &quot;ci38011712&quot;, &quot;ak16916451&quot;, &quot;uw61311302&quot;, &quot;n...
+## $ Time              &lt;dttm&gt; 2017-09-27 03:38:50, 2017-09-27 03:30:46, 2...
+## $ Latitude          &lt;dbl&gt; 33.90967, 58.38580, 44.54183, 37.36180, 45.3...
+## $ Longitude         &lt;dbl&gt; -116.1858, -155.4285, -122.5562, -115.5583, ...
+## $ `Depth/km`        &lt;dbl&gt; 9.42, 229.60, 13.09, 8.90, -1.63, 7.44, 6.21...
+## $ Author            &lt;chr&gt; &quot;ci&quot;, &quot;ak&quot;, &quot;uw&quot;, &quot;nn&quot;, &quot;uw&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;c...
+## $ Catalog           &lt;chr&gt; &quot;ci&quot;, &quot;ak&quot;, &quot;uw&quot;, &quot;nn&quot;, &quot;uw&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;c...
+## $ Contributor       &lt;chr&gt; &quot;ci&quot;, &quot;ak&quot;, &quot;uw&quot;, &quot;nn&quot;, &quot;uw&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;c...
+## $ ContributorID     &lt;chr&gt; &quot;ci38011712&quot;, &quot;ak16916451&quot;, &quot;uw61311302&quot;, &quot;n...
+## $ MagType           &lt;chr&gt; &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;m...
+## $ Magnitude         &lt;dbl&gt; 0.70, 2.70, 2.25, 1.10, 1.11, 1.51, 0.59, 0....
+## $ MagAuthor         &lt;chr&gt; &quot;ci&quot;, &quot;ak&quot;, &quot;uw&quot;, &quot;nn&quot;, &quot;uw&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;c...
+## $ EventLocationName &lt;chr&gt; &quot;21km N of Indio, CA&quot;, &quot;79km ESE of King Sal...</code></pre>
 </section></section>
-<section><section id="creditos" class="titleslide slide level1"><h1>Créditos</h1></section></section>
+<section><section id="metainfo-creditos" class="titleslide slide level1 center white" data-background="#FF5722"><h1>Metainfo &amp; Créditos</h1></section></section>
     </div>
   </div>
 

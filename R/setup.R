@@ -64,6 +64,3 @@ hc <- hchart(x, color = "#21908C") %>%
 hc
   
 sw(hc, "vis-dis.html")
-
-
-
