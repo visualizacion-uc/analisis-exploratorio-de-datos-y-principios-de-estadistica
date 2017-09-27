@@ -650,7 +650,7 @@ ggplot(dfdist) +
 Existen otras alternativas. En datos simétricos:
 
 ```{r, echo=FALSE, fig.width=8, fig.height=5}
-gg_dists("Simétrica", main_color)
+gg_dists("Simetrica", "#420A68")
 ```
 
 ----
@@ -658,17 +658,23 @@ gg_dists("Simétrica", main_color)
 Datos bimodales
 
 ```{r, echo=FALSE, fig.width=8, fig.height=5}
-gg_dists("Bimodal")
+gg_dists("Bimodal", "#932667")
 ```
 
 ----
+
+Datos uniformemente distribuídos
+
 ```{r, echo=FALSE, fig.width=8, fig.height=5}
-gg_dists("Uniforme")
+gg_dists("Uniforme", "#DD513A")
 ```
 
 ----
+
+Variable Asimétrica
+
 ```{r, echo=FALSE, fig.width=8, fig.height=5}
-gg_dists("Asimétrica")
+gg_dists("Asimetrica", "#FCA50A")
 ```
 
 ## Variables Categóricas x 2

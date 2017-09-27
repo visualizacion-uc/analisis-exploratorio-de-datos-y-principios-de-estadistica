@@ -4,6 +4,7 @@ library(viridis)
 library(jbkmisc)
 library(scales)
 library(stringr)
+library(highcharter)
 library(gridExtra)
 library(ggbeeswarm)
 
@@ -47,10 +48,10 @@ theme_null <- function(...) {
 n <- 3500
 
 dfdist <- bind_rows(
-  data_frame(key = "Simétrica", value = rnorm(n)),
+  data_frame(key = "Simetrica", value = rnorm(n)),
   data_frame(key = "Bimodal", value =  rnorm(n) + ifelse(runif(n) < 0.45, 4, 0)),
   data_frame(key = "Uniforme", value =  runif(n)),
-  data_frame(key = "Asimétrica", value = rchisq(n, 3))
+  data_frame(key = "Asimetrica", value = rchisq(n, 3))
 ) %>%
   mutate(key = factor(key, levels = unique(key))) %>% 
   group_by(key) %>% 
@@ -62,9 +63,11 @@ dfstats <- dfdist %>%
   summarise(media = mean(value), mediana = median(value)) %>% 
   gather(stat, value, -key)
 
-gg_dists <- function(key = "Simétrica", color = "#673AB7") {
+gg_dists <- function(k = "Simetrica", color = "#673AB7") {
   
-  dfdist2 <- filter(dfdist, key == key)  
+  dfdist2 <- dfdist %>% 
+    filter(key == k) %>% 
+    sample_n(1500)
   gg <- ggplot(dfdist2) + coord_flip() + theme_null()
   
   grid.arrange(
@@ -72,7 +75,7 @@ gg_dists <- function(key = "Simétrica", color = "#673AB7") {
     gg + geom_beeswarm(aes(x = factor(1), y = value), color = color, cex = 1.1, alpha = 0.2) + ggtitle("Beeswarm"),
     gg + geom_boxplot(aes(x = factor(1), y = value), color = color) + ggtitle("Boxplot"),
     gg + geom_violin(aes(x = factor(1), y = value), color = color) + ggtitle("Violin")
-  ) 
+  )
 }
 
 
