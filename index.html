@@ -962,44 +962,70 @@ d2 &lt;-<span class="st"> </span>datasaurus_dozen <span class="op">%&gt;%</span>
 <p><img src="index_files/figure-revealjs/unnamed-chunk-31-1.svg" width="576" /></p>
 </section><section class="slide level2">
 
-<p>Se puede complejizar, como todo</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos2) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(Year, <span class="dt">fill =</span> Theme), <span class="dt">binwidth =</span> <span class="dv">1</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_fill_viridis</span>(<span class="dt">discrete =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="index_files/figure-revealjs/unnamed-chunk-32-1.svg" width="576" /></p>
-</section><section class="slide level2">
-
 <p>Revisemos <a href="http://tinlizzie.org/histograms/" class="uri">http://tinlizzie.org/histograms/</a></p>
 <p><img src="img/hist.png" width = "60%"></p>
 </section><section class="slide level2">
 
 <p>Según la forma de la distribución, existen categorías:</p>
-<p><img src="index_files/figure-revealjs/unnamed-chunk-33-1.svg" width="768" /></p>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-32-1.svg" width="768" /></p>
 </section><section class="slide level2">
 
 <p>Existen otras alternativas. En datos simétricos:</p>
-<p><img src="index_files/figure-revealjs/unnamed-chunk-34-1.svg" width="768" /></p>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-33-1.svg" width="768" /></p>
 </section><section class="slide level2">
 
 <p>Datos bimodales</p>
-<p><img src="index_files/figure-revealjs/unnamed-chunk-35-1.svg" width="768" /></p>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-34-1.svg" width="768" /></p>
 </section><section class="slide level2">
 
 <p>Datos uniformemente distribuídos</p>
-<p><img src="index_files/figure-revealjs/unnamed-chunk-36-1.svg" width="768" /></p>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-35-1.svg" width="768" /></p>
 </section><section class="slide level2">
 
 <p>Variable Asimétrica</p>
-<p><img src="index_files/figure-revealjs/unnamed-chunk-37-1.svg" width="768" /></p>
-</section><section id="variables-categoricas-x-2" class="slide level2">
-<h2>Variables Categóricas x 2</h2>
-<p>heatmap treemap nested</p>
-</section><section id="variables-numericas-x-2" class="slide level2">
-<h2>Variables Numéricas x 2</h2>
-<p>scatter</p>
-</section><section id="numericas-y-categoricas" class="slide level2">
-<h2>Numéricas y Categóricas</h2>
-<p>scatter facet boxplot violin, swarm, hist,</p>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-36-1.svg" width="768" /></p>
+</section><section id="variables-categoricas-1" class="slide level2">
+<h2>2 Variables Categóricas</h2>
+<p>El heatmap es una usual alternativa</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">legos2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Pieces_cat =</span> <span class="kw">cut_number</span>(Pieces, <span class="dv">7</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(Theme, Pieces_cat) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(Theme, Pieces_cat, <span class="dt">fill =</span> n)) <span class="op">+</span><span class="st"> </span><span class="kw">scale_fill_viridis</span>()</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-37-1.svg" width="576" /></p>
+</section><section id="variables-numericas-tips" class="slide level2">
+<h2>2 Variables Numéricas + Tips</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(Pieces, USD_MSRP))</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-38-1.svg" width="576" /></p>
+<p><span class="fragment">Wakatela</span></p>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(Pieces, USD_MSRP)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_sqrt</span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_sqrt</span>()</code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-39-1.svg" width="576" /></p>
+<p><span class="fragment">Le sigue faltando cariño</span></p>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos2) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(Pieces, USD_MSRP, <span class="dt">size =</span> Minifigures, <span class="dt">color =</span> Year, <span class="dt">shape =</span> Theme), <span class="dt">alpha =</span> <span class="fl">0.7</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_sqrt</span>(<span class="dt">name =</span> <span class="st">&quot;Precio USD&quot;</span>, <span class="dt">labels =</span> dollar, <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">300</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_sqrt</span>(<span class="dt">name =</span> <span class="st">&quot;Piezas&quot;</span>, <span class="dt">labels =</span> comma, <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2000</span>)) </code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-40-1.svg" width="576" /></p>
+<p><span class="fragment">No saturar de <em>cariño</em></span></p>
+</section><section class="slide level2">
+
+<p><img style="-webkit-user-select: none;background-position: 0px 0px, 10px 10px;background-size: 20px 20px;background-image:linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee 100%),linear-gradient(45deg, #eee 25%, white 25%, white 75%, #eee 75%, #eee 100%);" src="https://media.giphy.com/media/xT9IglR8r8KULx7RpC/giphy.gif"></p>
+<p><strong>No saturar ni sobre complejizar</strong></p>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(legos) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(Pieces, USD_MSRP, <span class="dt">size =</span> Minifigures, <span class="dt">color =</span> Year), <span class="dt">alpha =</span> <span class="fl">0.7</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_viridis</span>(<span class="dt">option =</span> <span class="st">&quot;A&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_y_sqrt</span>(<span class="dt">name =</span> <span class="st">&quot;Precio USD&quot;</span>, <span class="dt">labels =</span> dollar, <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">300</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_sqrt</span>(<span class="dt">name =</span> <span class="st">&quot;Piezas&quot;</span>, <span class="dt">labels =</span> comma, <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2000</span>)) </code></pre></div>
+<p><img src="index_files/figure-revealjs/unnamed-chunk-41-1.svg" width="576" /></p>
 </section><section id="menciones-honrosas-menos-estandar" class="slide level2">
 <h2>Menciones Honrosas (menos estándar)</h2>
 </section><section id="lollipop" class="slide level2">
@@ -1008,33 +1034,35 @@ d2 &lt;-<span class="st"> </span>datasaurus_dozen <span class="op">%&gt;%</span>
 <p>Fuente: <a href="http://uc-r.github.io/lollipop" class="uri">http://uc-r.github.io/lollipop</a></p>
 </section><section id="joyploy" class="slide level2">
 <h2>Joyploy</h2>
+<p><img class="aligncenter size-medium wp-image-70496" src="https://pbs.twimg.com/media/DIkVLlDXkAEVIO6.jpg" alt="" width="500"></p>
 </section></section>
 <section><section id="ejercicio-i" class="titleslide slide level1 center white" data-background="#03A9F4"><h1>Ejercicio I</h1></section><section id="datos" class="slide level2">
 <h2>Datos</h2>
+<p>Dado la contigencia, estudiaremos la magnitud de los temblores en el pasado mes.</p>
 <p>seismic monitor data api <a href="https://earthquake.usgs.gov/fdsnws/event/1/" class="uri">https://earthquake.usgs.gov/fdsnws/event/1/</a></p>
-</section><section id="datos-1" class="slide level2">
-<h2>Datos</h2>
+</section><section class="slide level2">
+
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 
 data &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;https://earthquake.usgs.gov/fdsnws/event/1/query?starttime=2017-09-01&amp;endtime=2017-09-31&amp;format=text&quot;</span>, <span class="dt">delim =</span> <span class="st">&quot;|&quot;</span>)
 <span class="kw">glimpse</span>(data)</code></pre></div>
-<pre><code>## Observations: 8,663
+<pre><code>## Observations: 8,668
 ## Variables: 13
-## $ `#EventID`        &lt;chr&gt; &quot;nc72899936&quot;, &quot;nc72899931&quot;, &quot;ci38012368&quot;, &quot;c...
-## $ Time              &lt;dttm&gt; 2017-09-27 18:57:08, 2017-09-27 18:56:28, 2...
-## $ Latitude          &lt;dbl&gt; 38.81333, 38.57150, 34.13450, 33.39450, 37.5...
-## $ Longitude         &lt;dbl&gt; -122.8275, -122.4468, -117.7432, -116.9267, ...
-## $ `Depth/km`        &lt;dbl&gt; 1.73, 1.77, 1.32, 15.83, 2.46, 5.53, 79.10, ...
-## $ Author            &lt;chr&gt; &quot;nc&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;ak&quot;, &quot;n...
-## $ Catalog           &lt;chr&gt; &quot;nc&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;ak&quot;, &quot;n...
-## $ Contributor       &lt;chr&gt; &quot;nc&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;ak&quot;, &quot;n...
-## $ ContributorID     &lt;chr&gt; &quot;nc72899936&quot;, &quot;nc72899931&quot;, &quot;ci38012368&quot;, &quot;c...
-## $ MagType           &lt;chr&gt; &quot;md&quot;, &quot;md&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;md&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;m...
-## $ Magnitude         &lt;dbl&gt; 0.68, 1.68, 1.90, 1.78, 0.57, 0.30, 1.70, 0....
-## $ MagAuthor         &lt;chr&gt; &quot;nc&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;ak&quot;, &quot;n...
-## $ EventLocationName &lt;chr&gt; &quot;7km WNW of The Geysers, California&quot;, &quot;0km S...</code></pre>
+## $ `#EventID`        &lt;chr&gt; &quot;ci38012400&quot;, &quot;ci38012384&quot;, &quot;nn00607260&quot;, &quot;n...
+## $ Time              &lt;dttm&gt; 2017-09-27 19:29:41, 2017-09-27 19:10:22, 2...
+## $ Latitude          &lt;dbl&gt; 33.47117, 34.99200, 37.07770, 38.81333, 38.5...
+## $ Longitude         &lt;dbl&gt; -116.4818, -118.1970, -117.8687, -122.8275, ...
+## $ `Depth/km`        &lt;dbl&gt; 13.16, -0.84, 15.80, 1.73, 1.77, 9.75, 16.07...
+## $ Author            &lt;chr&gt; &quot;ci&quot;, &quot;ci&quot;, &quot;nn&quot;, &quot;nc&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;c...
+## $ Catalog           &lt;chr&gt; &quot;ci&quot;, &quot;ci&quot;, &quot;nn&quot;, &quot;nc&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;c...
+## $ Contributor       &lt;chr&gt; &quot;ci&quot;, &quot;ci&quot;, &quot;nn&quot;, &quot;nc&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;c...
+## $ ContributorID     &lt;chr&gt; &quot;ci38012400&quot;, &quot;ci38012384&quot;, &quot;nn00607260&quot;, &quot;n...
+## $ MagType           &lt;chr&gt; &quot;ml&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;md&quot;, &quot;md&quot;, &quot;ml&quot;, &quot;ml&quot;, &quot;m...
+## $ Magnitude         &lt;dbl&gt; 0.98, 1.30, 0.90, 0.68, 1.68, 1.32, 1.78, 1....
+## $ MagAuthor         &lt;chr&gt; &quot;ci&quot;, &quot;ci&quot;, &quot;nn&quot;, &quot;nc&quot;, &quot;nc&quot;, &quot;ci&quot;, &quot;ci&quot;, &quot;c...
+## $ EventLocationName &lt;chr&gt; &quot;20km ESE of Anza, CA&quot;, &quot;7km SSW of Mojave, ...</code></pre>
 </section></section>
-<section><section id="metainfo-creditos" class="titleslide slide level1 center white" data-background="#FF5722"><h1>Metainfo &amp; Créditos</h1></section></section>
+<section><section id="dudas" class="titleslide slide level1 center white" data-background="#FF5722"><h1>Dudas?!</h1></section></section>
     </div>
   </div>
 

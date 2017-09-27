@@ -619,16 +619,6 @@ ggplot(legos2) +
 
 ----
 
-Se puede complejizar, como todo
-
-```{r}
-ggplot(legos2) +
-  geom_histogram(aes(Year, fill = Theme), binwidth = 1) +
-  scale_fill_viridis(discrete = TRUE)
-```
-
-----
-
 Revisemos http://tinlizzie.org/histograms/
 
 <img src="img/hist.png" width = "60%">
@@ -677,19 +667,64 @@ Variable Asimétrica
 gg_dists("Asimetrica", "#FCA50A")
 ```
 
-## Variables Categóricas x 2
+## 2 Variables Categóricas
 
-heatmap
-treemap nested
+El heatmap es una usual alternativa
 
-## Variables Numéricas x 2
+```{r}
+legos2 %>% 
+  mutate(Pieces_cat = cut_number(Pieces, 7)) %>% 
+  count(Theme, Pieces_cat) %>% 
+  ggplot() +
+  geom_tile(aes(Theme, Pieces_cat, fill = n)) + scale_fill_viridis()
+```
 
-scatter
 
-## Numéricas y Categóricas
+## 2 Variables Numéricas + Tips
 
-scatter
-facet boxplot violin, swarm, hist, 
+```{r}
+ggplot(legos) + 
+  geom_point(aes(Pieces, USD_MSRP))
+```
+
+<span class="fragment">Wakatela</span>
+
+----
+
+```{r}
+ggplot(legos) + 
+  geom_point(aes(Pieces, USD_MSRP)) +
+  scale_y_sqrt() + scale_x_sqrt()
+```
+
+<span class="fragment">Le sigue faltando cariño</span>
+
+----
+
+```{r}
+ggplot(legos2) + 
+  geom_point(aes(Pieces, USD_MSRP, size = Minifigures, color = Year, shape = Theme), alpha = 0.7) +
+  scale_y_sqrt(name = "Precio USD", labels = dollar, limits = c(0, 300)) +
+  scale_x_sqrt(name = "Piezas", labels = comma, limits = c(0, 2000)) 
+```
+
+<span class="fragment">No saturar de _cariño_</span>
+
+----
+
+<img style="-webkit-user-select: none;background-position: 0px 0px, 10px 10px;background-size: 20px 20px;background-image:linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee 100%),linear-gradient(45deg, #eee 25%, white 25%, white 75%, #eee 75%, #eee 100%);" src="https://media.giphy.com/media/xT9IglR8r8KULx7RpC/giphy.gif">
+
+__No saturar ni sobre complejizar__
+
+----
+
+```{r}
+ggplot(legos) + 
+  geom_point(aes(Pieces, USD_MSRP, size = Minifigures, color = Year), alpha = 0.7) +
+  scale_color_viridis(option = "A") + 
+  scale_y_sqrt(name = "Precio USD", labels = dollar, limits = c(0, 300)) +
+  scale_x_sqrt(name = "Piezas", labels = comma, limits = c(0, 2000)) 
+```
 
 ## Menciones Honrosas (menos estándar)
 
@@ -701,16 +736,19 @@ Fuente: http://uc-r.github.io/lollipop
 
 ## Joyploy
 
+<img class="aligncenter size-medium wp-image-70496" src="https://pbs.twimg.com/media/DIkVLlDXkAEVIO6.jpg" alt="" width="500">
+
 # Ejercicio I { .center .white data-background="#03A9F4"}
 
-Dada la 
-
 ## Datos
+
+Dado la contigencia, estudiaremos la magnitud de los temblores en el
+pasado mes.
 
 seismic monitor data api
 https://earthquake.usgs.gov/fdsnws/event/1/
 
-## Datos
+----
 
 ```{r, cache=TRUE}
 library(tidyverse)
@@ -719,9 +757,4 @@ data <- read_delim("https://earthquake.usgs.gov/fdsnws/event/1/query?starttime=2
 glimpse(data)
 ```
 
-# Metainfo & Créditos { .center .white data-background="#FF5722"}
-
-<small>
->- Imágen Lego Arto Alanenpaa http://www.timesfreepress.com/news/community/story/2016/jul/27/calvdonaldsseeks-donations-library-makerspace/377683/
-
-</small>
+# Dudas?! { .center .white data-background="#FF5722"}
